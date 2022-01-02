@@ -1,0 +1,101 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.VocabularyAndPronounciationViewModel
+@{
+    ViewBag.Title = "VocabularyAndPronounciation";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+
+
+
+<!--  Start -->
+<div class="test-waraper">
+    <div class="container   ">
+        <div class="row">
+            <div class="col-lg-12 mt40">
+                <h4>Vocabulary & Pronunciation Booster</h4>
+                <!--  -->
+
+                @if (Model == null)
+                {
+                    <div class="start-test">
+
+                        <div class="question">
+                            <h3>No Question Available</h3>
+                            @*<div class="mediPlayer">
+                                    <audio class="listen" preload="none" data-size="250" src="@Model.FileUrl"></audio>
+
+                                </div>*@
+
+                            @*<audio controls="controls" src="@Model.FileUrl" controlsList="nodownload"></audio>
+                                <h5 class="mt60">
+                                    (Play for pronunciation)
+                                </h5>*@
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="start-test">
+
+                        <div class="question">
+                            <h3>@Model.Word <small>(@Model.WordType)</small></h3>
+                            @*<div class="mediPlayer">
+                                    <audio class="listen" preload="none" data-size="250" src="@Model.FileUrl"></audio>
+
+                                </div>*@
+
+                            <audio controls="controls" src="@Model.FileUrl" controlsList="nodownload"></audio>
+                            <h5 class="mt60">
+                                (Play for pronunciation)
+                            </h5>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--  -->
+                    <h4>Meaning</h4>
+                    <!--  -->
+                    <div class="start-test">
+
+                        <div class="answer">
+                            @*<h5>Adjective</h5>
+
+                                <ol type="1">
+                                    <li>
+                                        relating to education and schlarship.
+                                        <br>Sentence use:
+                                    </li>
+                                    <li>
+                                        not of practical relevance; of only theoretical interest.<br>
+                                        Sentence use:
+                                    </li>
+                                </ol>
+
+
+                                <h5>noun</h5>
+
+                                <ol type="1">
+                                    <li>a teacher or scholar in a university or the institute of higher education.</li>
+                                </ol>*@
+                            @Html.Raw(Model.WordMeaning)
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--  -->
+                }
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="footer-button">
+    <div class="container">
+
+        <a href="@Url.Action( "MyClassRoomCourseDetails" , "Course" , new { id = @ViewBag.CourseId})" title="" class="ft-btn button-previous">Previous</a>
+        <a href="@Url.Action("SynonymBooster", "Course" , new { @courseId = @ViewBag.CourseId})" title="" class="ft-btn button-next">Next</a>
+    </div>
+</div>
+<!--  End -->

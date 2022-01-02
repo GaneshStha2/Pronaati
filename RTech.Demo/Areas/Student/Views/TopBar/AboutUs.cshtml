@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "AboutUs";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<!--  -->
+<section class="uk-section-small uk-bg-dark-blue uk-light   uk-relative  ">
+
+    <div class="uk-container  ">
+        <div class="uk-child-width-expand  uk-flex-middle  " uk-grid>
+            <!--  -->
+            <div>
+                <h2 class="uk-margin-remove uk-text-bold">About Us</h2>
+                <ul class="uk-breadcrumb   ">
+                    <li><a href="https://pronaati.com.au/">Home</a></li>
+                    <li><span>About Us</span></li>
+                </ul>
+            </div>
+            <!--  -->
+            <!--  -->
+            <div class="uk-text-right">
+                <div class="sharethis-inline-share-buttons"></div>
+            </div>
+            <!--  -->
+
+        </div>
+    </div>
+
+</section>
+<!--  -->
+<!--  -->
+<section class="uk-section uk-bg-mudred">
+    <div class="uk-container ">
+
+        <div uk-grid>
+            <!--  -->
+            <div class="uk-width-expand@m  ">
+                <div class="uk-img-400">
+                    <img src="/images/banner.jpg">
+                </div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                </div>
+            </div>
+            <!--  -->
+            <!--  -->
+            <div class="uk-width-1-4@m">
+                <!--  -->
+                <aside class="uk-aside">
+                    <div class="uk-aside-title uk-light">
+                        <h3 class="uk-margin-remove">Quick Link</h3>
+                    </div>
+                    <ul>
+                        <li> <a href="https://pronaati.com.au/"> Home </a> </li>
+                        <li> <a href="https://pronaati.com.au/about-us.html"> About Us </a> </li>
+                        <li> <a href="@Url.Action("MyClassRoomCourseList","Course")"> Packages </a> </li>
+                        <li> <a href="@Url.Action("Index","MockTestHome", new { @Area="MockTest"})"> Mock Test </a> </li>
+                        <li> <a href="https://pronaati.com.au/testimonials.html"> Testimonials </a> </li>
+                        <li> <a href="https://pronaati.com.au/blog.html"> Blog </a> </li>
+                        <li> <a href="https://pronaati.com.au/contact-us.html"> Contact Us </a> </li>
+                    </ul>
+
+                </aside>
+                <!--  -->
+                <!--  -->
+                <aside class="uk-aside">
+
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=1259198000890262&autoLogAppEvents=1"></script>
+                    <div class="fb-page" data-href="https://www.facebook.com/naaticlasses/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/naaticlasses/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/naaticlasses/">Pro Naati Pty Ltd</a></blockquote>
+                    </div>
+
+                </aside>
+                <!--  -->
+            </div>
+            <!--  -->
+        </div>
+
+    </div>
+</section>
+<!--  -->
+    <?php include('include/footer.php'); ?>

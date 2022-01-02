@@ -1,0 +1,52 @@
+﻿@model List<RTech.Demo.Areas.Student.ViewModels.TestimonialViewModel>
+
+@{
+    ViewBag.Title = "Testimonials";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<!--  -->
+<section class="uk-section-small uk-bg-dark-blue uk-light  uk-text-center uk-arrow-down uk-relative  ">
+
+    <div class="uk-container  ">
+        <h2 class="uk-margin-remove uk-text-bold">Testimonials</h2>
+        <ul class="uk-breadcrumb uk-flex uk-flex-center">
+            <li><a href="@Url.Action("Home","TopBar", new { @Area = "Student"})">Home</a></li>
+            <li><span>Testimonials</span></li>
+        </ul>
+    </div>
+
+</section>
+<!--  -->
+<!--  -->
+<section class="uk-section uk-bg-mudred">
+    <div class="uk-container uk-container-small">
+
+        <ul class="uk-list  uk-child-width-1-1 uk-child-width-1-1@s uk-child-width-1-1@m" uk-grid>
+
+
+            <!--  -->
+            @{
+                foreach (var item in Model)
+                {
+                    <li>
+                        <div class="uk-testimonials-list uk-padding-large uk-margin-bottom">
+                            <div class="uk-image-user">
+                                <img src="@item.Image" alt="">
+                            </div>
+                            <p>
+                               @item.Message
+                            </p>
+                            <h5>   @item.Name   <span> Score: @item.Score</span></h5>
+
+                        </div>
+                    </li>
+                }
+            }
+          
+
+        </ul>
+
+    </div>
+</section>
+<!--  -->

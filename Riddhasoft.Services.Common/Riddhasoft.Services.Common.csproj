@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{302EB62D-EB13-453E-A267-3ED06677E4B7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Riddhasoft.Services.Common</RootNamespace>
+    <AssemblyName>Riddhasoft.Services.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EKendoAutoComplete.cs" />
+    <Compile Include="EKendoGrid.cs" />
+    <Compile Include="Extension.cs" />
+    <Compile Include="IBaseService.cs" />
+    <Compile Include="MailCommon.cs" />
+    <Compile Include="MobileResult.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceResult.cs" />
+    <Compile Include="ViewModels\CheckBoxModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RTech.Core.Repository\Riddhasoft.Core.Repository.csproj">
+      <Project>{9604fec8-726a-4731-afd2-0ee7a7dd5aea}</Project>
+      <Name>Riddhasoft.Core.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\Riddhasoft.Attendance.Entities.dll" />
+    <Content Include="bin\Debug\Riddhasoft.Attendance.Entities.pdb" />
+    <Content Include="bin\Debug\Riddhasoft.DB.dll" />
+    <Content Include="bin\Debug\Riddhasoft.DB.pdb" />
+    <Content Include="bin\Debug\Riddhasoft.Entity.User.dll" />
+    <Content Include="bin\Debug\Riddhasoft.Entity.User.pdb" />
+    <Content Include="bin\Debug\Riddhasoft.Services.Common.dll" />
+    <Content Include="bin\Debug\Riddhasoft.Services.Common.pdb" />
+    <Content Include="bin\Debug\Riddhasoft.Setup.Entity.dll" />
+    <Content Include="bin\Debug\Riddhasoft.Setup.Entity.pdb" />
+    <Content Include="bin\Release\EntityFramework.dll" />
+    <Content Include="bin\Release\EntityFramework.xml" />
+    <Content Include="bin\Release\Riddhasoft.DB.dll" />
+    <Content Include="bin\Release\Riddhasoft.DB.pdb" />
+    <Content Include="bin\Release\Riddhasoft.Entity.User.dll" />
+    <Content Include="bin\Release\Riddhasoft.Entity.User.pdb" />
+    <Content Include="bin\Release\Riddhasoft.Services.Common.dll" />
+    <Content Include="bin\Release\Riddhasoft.Services.Common.pdb" />
+    <Content Include="obj\Debug\Riddhasoft.Services.Common.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\Riddhasoft.Services.Common.dll" />
+    <Content Include="obj\Debug\Riddhasoft.Services.Common.pdb" />
+    <Content Include="obj\Release\Riddhasoft.Services.Common.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Release\Riddhasoft.Services.Common.dll" />
+    <Content Include="obj\Release\Riddhasoft.Services.Common.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Riddhasoft.DB.dll.config" />
+    <None Include="bin\Debug\Riddhasoft.Setup.Entity.dll.config" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\Riddhasoft.Services.Common.csproj.CopyComplete" />
+    <None Include="obj\Debug\Riddhasoft.Services.Common.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\Riddhasoft.Services.Common.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\Riddhasoft.Services.Common.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Release\Riddhasoft.Services.Common.csprojResolveAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

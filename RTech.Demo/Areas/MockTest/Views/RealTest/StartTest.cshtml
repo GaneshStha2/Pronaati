@@ -1,0 +1,293 @@
+﻿@model RTech.Demo.Areas.MockTest.ViewModels.LanguageTestViewModel
+
+@{
+    ViewBag.Title = "StartTest";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <section class="uk-section uk-section-muted    uk-animation-fade ">
+      
+        <div class="uk-container">
+
+            <div class="uk-dashboard-wrapper">
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.ScreenCount)
+                @Html.HiddenFor(x => x.CorrectAnswerAudioLink)
+                @Html.HiddenFor(x => x.QuestionAudioLink)
+                @Html.HiddenFor(x => x.DialogueTitle)
+                @Html.HiddenFor(x => x.Description)
+                @Html.HiddenFor(x => x.DialogueDescription)
+                <div class="uk-db-border uk-padding uk-bg-white uk-text-center  uk-start-test">
+                    <p class="uk-margin-remove uk-text-bold uk-float-right">Timer : <span id="SectionTimer"></span></p>
+                    <br />
+                    <h3 class="uk-margin-remove uk-text-bold">Category: Mock Questions </h3>
+
+                    <h4 class="uk-margin-remove">Dialogue : @Model.DialogueTitle</h4>
+                    <h4 class="uk-margin-remove"> @Model.DialogueDescription</h4>
+                    <h5 class="text-danger">@ViewBag.TestMessage</h5>
+                    <div class="uk-padding-small uk-bg-light uk-margin uk-border-radius-medium    ">
+                        <h4 class="uk-margin-remove"> 1) Segment- @Model.ScreenCount <b>(@Model.LanguageType)</b>- @Model.Description</h4>
+
+                    </div>
+
+                    <audio controls width="100%">
+                        <source src="@Model.QuestionAudioLink" type="audio/ogg">
+                        <source src="@Model.QuestionAudioLink" type="audio/mpeg">
+                    </audio>
+                    <p> @Model.TestInstruction1</p>
+
+                    <div class="uk-padding-small uk-bg-light uk-margin uk-padding-large uk-border-radius-small">
+                        <div class="uk-bg-white uk-border-radius-small uk-padding">
+                            <img src="/images/icon/microphone-of-voice.svg" id="recordingImage" alt="" width="70">
+                            <p>Please record your answer...</p>
+                            <p>@Model.TestInstruction2</p>
+                            <input type="hidden" id="AudioUrl" name="RecordedAudioLink" />
+                            <audio controls width="100%" record id="recordedAnswer">
+                                <source src="@Model.RecordedAudioLink" id="recordedAnswer" type="audio/ogg">
+                                <source @Model.RecordedAudioLink id="recordedAnswer" type="audio/mpeg">
+                            </audio>
+                            <div class="uk-clearfix uk-margin">
+                                <a class="uk-button uk-button-primary" id="record">Record</a>
+                                <a class="uk-button uk-button-danger" id="stopRecord">Stop Recording</a>
+
+                            </div>
+                            <p>@Model.TestInstruction3</p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="uk-db-footer uk-text-center uk-padding">
+                    <div class="uk-grid-small uk-child-width-1-2" uk-grid>
+                        <div class="uk-text-left ">
+
+                            <a href=" @Url.Action("StartTest","RealTest",new {@Area = "MockTest",@screenCount =RTech.Demo.Common.NaatiMockTestSession.ScreenCount - 1 })" class="uk-button  uk-button-danger uk-border-pill uk-animation-fade"><span uk-icon="chevron-left"></span>Back</a>
+                        </div>
+                        <div class="uk-text-right ">
+
+                            <button type="submit" class="uk-button uk-button-primary uk-border-pill uk-animation-fade">Next <span uk-icon="chevron-right"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+}
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        var timeElapsed = 0;
+        var timetotal = 10;
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            console.log('getUserMedia supported.');
+            navigator.mediaDevices.getUserMedia(
+                // constraints - only audio needed for this app
+                {
+                    audio: true
+                    //video: true
+                })
+
+                // Success callback
+                .then(stream => { handlerFunction(stream) })
+
+                // Error callback
+                .catch(function (err) {
+                    console.log('The following getUserMedia error occured: ' + err);
+                    alert('Microphone device not found');
+                }
+                );
+        }
+
+        else {
+            console.log('getUserMedia not supported on your browser!');
+        }
+
+        var blob = new Blob();
+        var audio = new Audio();
+        playBack = $("#recordedAnswer")
+        function handlerFunction(stream) {
+            debugger;
+            var mediaRecorder = new MediaRecorder(stream);
+            stopRecord.disabled = true;
+            record.onclick = function () {
+                debugger;
+                if (mediaRecorder.state == "inactive") {
+                    var recordingImage = document.getElementById("recordingImage");
+                    recordingImage.src = "/Images/recordingLogo.gif";
+                    mediaRecorder.start();
+                    console.log(mediaRecorder.state);
+                    console.log("recorder started");
+                    audioChunks = [];
+                    stopRecord.disabled = false;
+                    record.disabled = true;
+                }
+            }
+
+            mediaRecorder.ondataavailable = function (e) {
+                debugger;
+                audioChunks.push(e.data);
+            }
+
+
+            stopRecord.onclick = function () {
+                if (mediaRecorder.state == "recording") {
+                    var recordingImage = document.getElementById("recordingImage");
+                    recordingImage.src = "/images/icon/microphone-of-voice.svg ";
+                    mediaRecorder.stop();
+                    record.disabled = false;
+                    stopRecord.disabled = true;
+                    console.log(mediaRecorder.state);
+                    console.log("recorder stopped");
+                }
+
+            }
+
+
+            mediaRecorder.onstop = function (e) {
+                audio.src = "";
+                if (mediaRecorder.state == "inactive") {
+                    blob = new Blob(audioChunks, { type: 'audio/mpeg-3' });
+                    var audioSrc = URL.createObjectURL(blob);
+                    $("#recordedAnswer")[0].src = audioSrc;
+                    PostData();
+                }
+            }
+
+            function PostData() {
+
+                var url = $("#recordedAnswer")[0].src.split('/');
+
+                var fileType = 'audio';
+                var fileName = url[url.length - 1] + ".ogg";  // or "wav"
+
+
+                var formData = new FormData();
+                formData.append(fileType + '-filename', fileName);
+                formData.append(fileType + '-blob', blob);
+
+                xhr('/MockTest/RealTest/PostRecordedAudio', formData, function (data) {
+                    debugger;
+                    var storedAudioLink = "/AudioFiles/" + fileName;
+                    $("#AudioUrl").val(data);
+                    $("input[name='RecordedAudioLink']").val(storedAudioLink);
+
+                });
+
+                function xhr(url, data, callback) {
+                    debugger;
+                    var request = new XMLHttpRequest();
+                    request.onreadystatechange = function () {
+                        if (request.readyState == 4 && request.status == 200) {
+
+                            callback(request.responseText);
+                        }
+                    };
+                    request.open('POST', url);
+                    request.send(data);
+                }
+            }
+
+        };
+
+
+        
+        document.onkeydown = function (e) {
+
+            // keycode for F5 function
+            if (e.keyCode === 116) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode === 82) {
+                return false;
+            }
+
+        };
+
+
+        var sec = '';
+        var min = '';
+        var hour = '';
+        debugger;
+        //var sessionTime = '20:00:00';
+        var sessionTime = '@TempData["Time"]';
+        var time = sessionTime.split(":");
+        var sec = time[2];
+        var min = time[1];
+        var hour = time[0];
+
+
+        if (sessionTime != "") {
+
+            var SectionTimer = function () {
+                debugger;
+
+               
+                    if (sec == 0 && min == 0 && hour == 0) {
+                        document.getElementById("SectionTimer").innerHTML = 'Finished';
+                        
+                        window.location.href = "/MockTest/RealTest/TimeEnded";
+                        PopUp();
+                    }
+
+                    else {
+                        if (sec == 0 && min != 0) {
+                            sec = 60;
+                            --min;
+                        }
+                        if (--sec === 0 && min != 0) {
+                            sec = 60;
+                            if (--min === 0 && hour != 0) {
+                                min = 60;
+                                if (--hour === 0) hour = 24
+                            }
+
+                        }
+                        document.getElementById("SectionTimer").innerHTML = hour + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+                    }
+
+                
+            };
+            setInterval(SectionTimer, 1000);
+            SectionTimer();
+        }
+       
+
+        //For Popup
+        var popUpCountDown = 5;
+        function PopUp() {  // Custom Show button code.
+            debugger;
+            $("#subscriber_form").modal('show');
+
+            popUpCountDown--;
+            if (popUpCountDown <= 0) {
+                SkipSection();
+                window.location.href = "/MockTest/RealTest/TimeEnded";
+            }
+
+
+
+        }
+
+
+        $("#EndExam").on('click', function () {
+
+            window.close();
+        });
+
+        $("#finish").on('click', function () {
+
+            window.close();
+
+
+        });
+    </script>
+
+}
+

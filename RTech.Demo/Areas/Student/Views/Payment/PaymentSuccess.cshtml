@@ -1,0 +1,32 @@
+﻿
+@{
+                /**/
+
+                ViewBag.Title = "PaymentSuccess";
+                Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<section class="uk-section uk-section-muted   uk-animation-fade ">
+
+    <div class="uk-container">
+
+        <div class="uk-dashboard-wrapper">
+
+            <div class="uk-db-border uk-padding-large uk-bg-white uk-text-center">
+                <img src="/images/success.gif" alt="" width="130" class="uk-margin-bottom">
+                <h2 class="uk-text-success uk-margin-remove">
+                    <b>Congratulations! </b>
+                </h2> -
+                <h4 class="uk-margin-remove">You have successfully completed payment now you can start test</h4>
+
+            </div>
+
+            <div class="uk-db-footer uk-text-center uk-padding-small">
+                <a href="@Url.Action("MyNaatiMocktestList","MockTestHome",new { @Area= "MockTest"})" class="uk-button uk-button-primary">Start Test</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+

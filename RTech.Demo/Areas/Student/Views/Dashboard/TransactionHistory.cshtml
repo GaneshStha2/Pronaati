@@ -1,0 +1,60 @@
+﻿@model List<RTech.Demo.Areas.Student.ViewModels.TransactionHistoryViewModel>
+@{
+    ViewBag.Title = "TransactionHistory";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+
+<!--  Start -->
+
+<section class="uk-section uk-section-muted    uk-animation-fade ">
+
+    <div class="uk-container">
+
+        <div class="uk-dashboard-wrapper">
+            <div class="uk-db-header ">
+                <h3>Transaction History</h3>
+            </div>
+            <div class="uk-db-border uk-padding uk-bg-white ">
+
+                <table class="uk-table uk-table-striped ">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Test Name</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Transaction Type</th>
+                            <th>Invoice </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{ int i = 0;}
+                        @foreach (var item in Model)
+                        {
+                            i++;
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.PackageTitle</td>
+                                <td>@item.Date</td>
+                                <td>$ @item.Amount</td>
+                                <td>@item.PaymentMode</td>
+                                <td>
+                                    <a href="@Url.Action("TransactionInvoice","Dashboard", new { @Area = "Student", @paymentId = item.Id})" target="_blank" class="uk-button uk-button-primary uk-border-pill">Invoice <span uk-icon="file-pdf"></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="uk-db-footer uk-text-center uk-padding-small">
+                <a href="@Url.Action("Index","Dashboard")" class="uk-button  uk-button-danger uk-border-pill"><span uk-icon="chevron-left"></span>Back</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!--  End -->

@@ -1,0 +1,33 @@
+﻿
+@{
+    string baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pro Naati</title>
+</head>
+<body>
+    <div>
+        <h2> New Account Register</h2>
+
+        <p> @ViewBag.NewSignedUpEmail has created an account with the  https://pronaati.com.au/ </p>
+
+        <div class="align-content-center">
+            <a style="cursor:pointer" href=" @ViewBag.Link"> CLICK HERE TO VERIFY</a>
+        </div>
+        
+        <p><b>Thank You! </b></p>
+
+        <p><b>Pro Naati Pty Ltd </b></p>
+
+        <p> Address: Level 1/156, Princes Highway, Rockdale , NSW 2216 , Australia</p>
+        <p>Email: admin@pronaati.com.au</p>
+        <p>Phone:02 8542 3501 </p>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout_Adminlte.cshtml";
+}
+<style>
+    /*.modal {
+        display: block !important; /* I added this to see the modal, you don't need this */
+    }
+
+    */
+    /* Important part */
+    .modal-dialog {
+        overflow-y: initial !important
+    }
+
+    .bg-blue {
+        background-color: #a2bce5 !important;
+    }
+
+    /*#modal-body-id {
+        height: 800px !important;
+        overflow-y: auto !important;
+    }*/
+    #load_file_manager {
+        height: auto;
+        overflow-y: auto;
+        max-height: 400px;
+    }
+    .modal-lg {
+        width: 800px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        @T("Tutorial Setup")
+        <sup class="text-green">@T("Creation")</sup>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> @T("Home")</a></li>
+        <li class="active">@T("Tutorial Setup")</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <div class="modal" id="TutorialCreationModel">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bind="click:$root.CloseModal" aria-hidden="true">&times;</button>
+                    <header><h4 class="text-success">@T("Tutorial Setup")</h4></header>
+                </div>
+                <div class="modal-body">
+                    <div class="row" data-bind="with:Tutorial">
+                        <div class="col-lg-12">
+                            <div class="col-lg-12 form-group">
+                                <div class="required">
+                                    <label class="col-lg-4 control-label" for="Number">@T("Title")</label>
+                                    <div class="col-lg-7">
+                                        <input type="text" class="form-control" data-bind="value:Title" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label class="col-lg-4 control-label" for="Number">@T("ReadingText") </label>
+                                <div class="col-lg-7">
+                                    <textarea type="text" style="resize: vertical" class="form-control" data-bind="value:Description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-12">
+                        <h3>Select Files For Tutorial</h3>
+                        <div class="row table-responsive col-lg-6 ">
+                            <div class="">
+                                <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                    <thead class="primary bg-blue">
+                                        <tr>
+                                            <td colspan="3" align="center"><h4>Files</h4></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center col-lg-1">SN</th>
+                                            <th class="col-lg-2">FileName</th>
+                                            <th class="col-lg-2">File</th>
+                                            <th class="col-lg-1">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:TutorialDetails">
+                                        <tr>
+                                            @*<td data-bind="text:Id"></td>*@
+                                            <td class="text-center" data-bind="serialNo:$index()+1"></td>
+                                            <td data-bind="text:FileName"></td>
+                                            <td data-bind="text:FileURL"></td>
+                                            <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.RemoveSelectedFile">Remove</button> </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr data-bind="with:TutorialDetail">
+
+                                            <td></td>
+
+                                            <td data-bind="text:FileName"></td>
+                                            @*<input type="text" class="form-control" data-bind="value:FileName" />*@
+
+                                            <td>
+                                                @*<img class="img-rounded " style="cursor:pointer" width="120" height="120" data-bind="attr: {src: FileURL() || '/Images/logo-default.png'}">*@
+                                                <label class="btn btn-success btn-file col-lg-12">
+                                                    Browse <input data-bind="fileUpload: {value:FileURL}" type="file" value=" " class="btn btn-flat btn-file btn-success">
+                                                    <input data-bind="click:$root.OpenFileManager" type="file" value="FileURL" class="btn btn-flat btn-file btn-success">
+                                                </label>
+                                            </td>
+                                            <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddNewTutorial">Add </button> </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group col-lg-7">
+                            <input type="button" data-bind="click:CreateUpdate,createUpdateText:ModeOfButton" name="Save" class="btn btn-success" value=@T("Save") />
+                            <input type="button" data-bind="click:Reset" name="Reset" value=@T("Reset") class="btn btn-default" />
+                            <input type="button" id="close" data-bind="click:$root.CloseModal" value=@T("Back") class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="fileManager" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bind="click:$root.CloseFileManager" aria-hidden="true">&times;</button>
+                    <header><h4 class="text-blue">@T("File Manager")</h4></header>
+                </div>
+                <div class="modal-body" id="load_file_manager">
+
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <input type="button" data-bind="" name="Save" class="btn btn-success " value="Save" id="save">
+                        <input type="button" data-bind="click:$root.CloseFileManager" name="Reset" value="Cancel" id="cancel" class="btn btn-default ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- User Modal -->
+    <!-- Info boxes -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-success">
+
+                <div class="box-header">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default " data-bind="click:$root.ShowModal"><i class="fa fa-plus-square text-green">&nbsp;@T("Create")</i></button>
+                        <button type="button" class="btn btn-default " data-bind="click:$root.Select"><i class="fa fa-pencil text-blue">&nbsp;@T("Edit")</i></button>
+                        <button type="button" class="btn btn-default " data-bind="click:$root.Delete"><i class="fa fa-trash text-red">&nbsp;@T("Delete")</i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-12" data-bind="kendoGrid:KendoGridOptions">
+                            <div id="Tutorials">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="mode-button-template">
+        <span class="glyphicon glyphicon-plus" data-bind="text:$root.ModeOfButton"></span>
+    </script>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- Main row -->
+    <!-- /.row -->
+</section>
+
+@if (Request.IsAjaxRequest())
+{
+    @*<script src="~/Scripts/bootstrap-strength-meter.js"></script>*@
+    @*<script src="~/Areas/User/Scripts/Riddha.Script.User.Model.js"></script>
+        <script src="~/Areas/User/Scripts/Riddha.Script.User.Controller.js"></script>*@
+    <script type="text/javascript">
+        //Riddha.global.permission.action('4002').done(function (data) {
+        //    Riddha.global.permission.actions = data.Data;
+        ko.cleanNode(document.getElementById("partial-render"));
+        debugger;
+        var obj = new TutorialSetupController();
+        ko.applyBindings(obj, document.getElementById("partial-render"));
+        //});
+    </script>
+}
+else
+{
+    @section scripts
+    {
+        <script type="text/javascript">
+            //Riddha.global.permission.action('4002').done(function (data) {
+            //    Riddha.global.permission.actions = data.Data;
+            ko.cleanNode(document.getElementById("partial-render"));
+            debugger;
+            var obj = new TutorialSetupController();
+            ko.applyBindings(obj, document.getElementById("partial-render"));
+                                                                                                                                                                            //});
+        </script>
+    }
+}

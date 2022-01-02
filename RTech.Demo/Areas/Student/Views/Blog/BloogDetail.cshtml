@@ -1,0 +1,77 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.BlogDetailViewModel
+@{
+    ViewBag.Title = "Blog Detail";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+<!--  -->
+<section class="uk-section  uk-bg-mudred">
+    <div class="uk-container ">
+        <div class="uk-flex uk-flex-middle" uk-grid>
+            <div class="uk-width-expand@m     ">
+                <!--  -->
+
+                <h2 class="uk-margin-remove uk-text-bold">@Model.Title</h2>
+                <ul class="uk-breadcrumb   ">
+                    <li><a href="@Url.Action("","", new { @Area = ""})">Home</a></li>
+                    <li><a href="@Url.Action("Blog","Blog", new { @Area = "Student"})">Blog</a></li>
+                    <li><span>@Model.Title</span></li>
+                </ul>
+            </div>
+            <!--  -->
+            <!--  -->
+            <div class="uk-width-1-4@m uk-text-right">
+                <div class="sharethis-inline-share-buttons"></div>
+
+            </div>
+            <!--  -->
+
+        </div>
+
+        <div uk-grid>
+            <!--  -->
+            <div class="uk-width-expand@m  ">
+                <div class="uk-img-400">
+                    <img src="@Model.Image">
+                </div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    @Html.Raw(Model.Description)
+                </div>
+            </div>
+            <!--  -->
+            <!--  -->
+            <div class="uk-width-1-4@m">
+                <!--  -->
+                <aside class="uk-aside">
+                    <div class="uk-aside-title uk-light">
+                        <h3 class="uk-margin-remove">Quick Link</h3>
+                    </div>
+                    <ul>
+                        <li> <a href="@Url.Action("","", new { @Area = ""})"> Home </a> </li>
+                        <li> <a href="@Url.Action("","", new { @Area = ""})"> About Us </a> </li>
+                        <li> <a href="@Url.Action("","", new { @Area = ""})"> Packages </a> </li>
+                        <li> <a href="@Url.Action("","", new { @Area = ""})"> Mock Test </a> </li>
+                        <li> <a href="@Url.Action("","", new { @Area = ""})"> Testimonials </a> </li>
+                        <li> <a href="@Url.Action("","", new { @Area = ""})"> Blog </a> </li>
+                        <li> <a href="@Url.Action("","", new { @Area = ""})"> Contact Us </a> </li>
+                    </ul>
+
+                </aside>
+                <!--  -->
+                <!--  -->
+                <aside class="uk-aside">
+
+                    <div id="fb-root"></div>
+                    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=1259198000890262&autoLogAppEvents=1"></script>
+                    <div class="fb-page" data-href="https://www.facebook.com/naaticlasses/" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/naaticlasses/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/naaticlasses/">Pro Naati Pty Ltd </a></blockquote>
+                    </div>
+
+                </aside>
+                <!--  -->
+            </div>
+            <!--  -->
+        </div>
+
+    </div>
+</section>
+<!--  -->

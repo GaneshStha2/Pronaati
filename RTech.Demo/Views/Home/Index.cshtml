@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout_Adminlte.cshtml";
+}
+<style>
+    .cover-image {
+        background: url(Images/under-2891888_960_720.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+<div>
+    <section class="content-header">
+        <h1>
+            @T("Dashboard")
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> @T("Home")</a></li>
+            <li class="active">@T("Dashboard")</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+    </section>
+</div>
+@section scripts{
+}
+
+

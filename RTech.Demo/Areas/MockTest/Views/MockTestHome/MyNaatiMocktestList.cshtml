@@ -1,0 +1,76 @@
+﻿@model List<RTech.Demo.Areas.MockTest.ViewModels.MockTestPackageViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<section class="uk-section uk-section-muted    uk-animation-fade ">
+
+    <div class="uk-container">
+
+        <div class="uk-dashboard-wrapper">
+            <div class="uk-db-header ">
+                <h3>Mock Test</h3>
+            </div>
+            <div class="uk-db-border uk-padding uk-bg-white ">
+
+                <table class="uk-table uk-table-striped ">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Start Test</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{ int i = 0;}
+                        @foreach (var item in Model)
+                        {
+                            i++;
+
+                        <tr>
+                            <td>@i</td>
+                            <td> @item.PackageTitle</td>
+                            <td>@item.PurchasedDate</td>
+                            @if (item.IsExpired == true)
+                            {
+                                <td>
+                                    Expired &nbsp;
+                                    @*        <a href="@Url.Action("Index","Payment", new {Area="Student", @Code = item.PackageCode,@PaymentFor = Riddhasoft.Setup.Entity.PaymentFor.MockTestPackage })" class="uk-button  uk-button-primary uk-border-pill">Renew</a>*@
+                                </td>
+                            }
+                            else
+                            {
+                                if (item.IsTaken == false)
+                                {
+                                    <td><a href="@Url.Action("MockTestDialogues","MockTestHome", new { @mockTestId = item.PackageId, @testSource= Riddhasoft.MockTest.Entity.TestSource.MockTest })" class="uk-button  uk-button-primary uk-border-pill">View <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        Completed
+                                        <a href="@Url.Action("RenewMockTest","MockTestHome", new { @mockTestId = item.PackageId, @testSource= Riddhasoft.MockTest.Entity.TestSource.MockTest })" class="uk-button  uk-button-primary uk-border-pill">Renew <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                    </td>
+                                }
+
+                            }
+
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="uk-db-footer uk-text-center uk-padding-small">
+                <a href="@Url.Action("Index","Dashboard", new { @Area="Student"})" class="uk-button  uk-button-danger uk-border-pill"><span uk-icon="chevron-left"></span>Back</a>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+

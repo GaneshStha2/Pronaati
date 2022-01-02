@@ -1,0 +1,348 @@
+﻿@*@{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_Layout_Adminlte.cshtml";
+    }*@
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout_Adminlte.cshtml";
+}
+
+
+<style>
+    .panel-body {
+        padding: 0px;
+    }
+
+    .add-input {
+        float: left;
+    }
+
+    #treeview .k-sprite {
+        background-image: url("../content/coloricons-sprite.png");
+    }
+
+    .rootfolder {
+        background-position: 0 0;
+    }
+
+    .folder {
+        background-position: 0 -16px;
+    }
+
+    .pdf {
+        background-position: 0 -32px;
+    }
+
+    .html {
+        background-position: 0 -48px;
+    }
+
+    .image {
+        background-position: 0 -64px;
+    }
+
+    .panel-heading {
+        padding: 10px 10px;
+    }
+
+    .outer {
+        -webkit-user-select: none;
+    }
+
+    .inner {
+        -webkit-user-select: initial;
+    }
+
+    div.first {
+        display: block;
+        background-color: white;
+        height: 6em;
+        width: 10em;
+        text-align: center;
+    }
+
+        div.first:hover {
+            background-color: aqua;
+            cursor: pointer;
+        }
+
+
+    p.second {
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .second input[type='checkbox'] {
+        transform: translateY(15%);
+        cursor: pointer;
+    }
+
+    .appbtn {
+        /*display: inline-block;
+        padding: 8px 8px;
+        margin-bottom: 0;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 1.428571429;*/
+        border-radius: 3px;
+        position: relative;
+        padding: 15px 5px;
+        margin: 0 0 10px 10px;
+        min-width: 135px;
+        height: 96px;
+        text-align: center;
+        color: #666;
+        border: 1px solid #ddd;
+        background-color: #f4f4f4;
+        font-size: 12px;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Item
+        <sup>Creation</sup>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Item</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- AccountGroup Modal -->
+
+
+
+    <div class="modal" id="FolderGroupCreationModel" style="">
+        <div class="modal-dialog  ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <header><h4>Item Group Creation</h4></header>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" data-bind="with:FolderGroup">
+                        @*<div class="form-group">
+                                <label class="col-lg-3 control-label" for="Number">Code</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" required data-bind="value:Code" id="form-group-input " placeholder="Code">
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="Number">Name</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" required data-bind="value:Name" id="form-group-input " placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="Number">Parent</label>
+                            <div class="col-lg-6">
+                                <select class="form-control" data-bind="options:$root.FolderGrps,optionsText:'Name',optionsValue:'Id',optionsCaption:'Root',value:ParentId"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-lg-12 text-center">
+                            <input type="button" data-bind="click:$root.CreateUpdate,value:$root.ModeOfButton" name="Save" class="btn bg-green">
+                            <input type="button" data-bind="click:$root.Reset" name="Reset" value="Reset" class="btn bg-black" />
+                            <input type="button" id="close" data-bind="click:$root.FolderGroupCloseModal" value="Back" class="btn bg-black" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="fileCreationModel" style="">
+        <div class="modal-dialog  ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <header><h4>Item Group Creation</h4></header>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" data-bind="with:File">
+                        @*<div class="form-group">
+                                <label class="col-lg-3 control-label" for="Number">Code</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" required data-bind="value:Code" id="form-group-input " placeholder="Code">
+                                </div>
+                            </div>*@
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="Number">Name</label>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" required data-bind="value:Name" id="form-group-input " placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="Number">Parent</label>
+                            <div class="col-lg-6">
+                                <select class="form-control" data-bind="options:$root.FolderGrps,optionsText:'Name',optionsValue:'Id',optionsCaption:'Root',value:FolderId"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="Number">File</label>
+                            <div class="col-lg-6">
+                                <img class="img-rounded " style="cursor:pointer" width="120" height="120" data-bind="attr: {src: URL() || '/Images/logo-default.png'}">
+                                <label class="btn btn-success btn-file col-lg-12">
+                                    Browse <input data-bind="fileUpload: {value:URL}" type="file" value=" " class="btn btn-flat btn-file btn-success">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-lg-12 text-center">
+                            <input type="button" data-bind="click:$root.FileCreateUpdate ,value:$root.FileModeOfButton" name="Save" class="btn bg-green">
+                            <input type="button" data-bind="click:$root.FileReset" name="Reset" value="Reset" class="btn bg-black" />
+                            <input type="button" id="close" data-bind="click:$root.FileCloseModal" value="Back" class="btn bg-black" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    &nbsp;
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <div class="btn-group">
+
+                            <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-wrench"></i>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-box-tool text-red" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="panel panel-default col-lg-3">
+                        <div class="panel-heading" style="background-color:white">
+                            <button type="button" data-bind="click:FolderGroupAdd" class="btn btn-default"><i class="fa fa-plus-circle text-green"></i> Add</button>
+                            <button type="button" data-bind="click:SelectFolderGroup" class="btn btn-default"><i class="fa fa-pencil-square text-green"></i> Edit</button>
+                            <button type="button" data-bind="click:DeleteFolderGroup" class="btn btn-default"><i class="fa fa-trash-o text-danger"></i> Delete</button>
+                            @*<button type="button" data-bind="click:$root.Refresh" class="btn btn-default"><i class="fa fa-refresh text-primary"></i></button>*@
+
+                        </div>
+                        <div class="panel-body">
+                            <div class="demo-section k-content">
+                                <div id="treeview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Files -->
+                    <div class="panel panel-default col-lg-9">
+                        <div class="panel-heading" style="background-color:white">
+                            <button type="button" data-bind="click:FileShowModal" class="btn btn-default"><i class="fa fa-plus-circle  text-green"></i> Add</button>
+                            <button type="button" data-bind="click:FileSelect" class="btn btn-default"><i class="fa fa-edit  text-green"></i> Edit</button>
+                            <button type="button" data-bind="click:FileDelete" class="btn btn-default"><i class="fa fa-trash  text-green"></i> Delete</button>
+                            <button type="button" data-bind="click:FileOpen" class="btn btn-default"><i class="fa fa-plus-circle  text-green"></i> Open</button>
+                        </div>
+                        <div class="panel-body" style="height:500px; overflow-y:auto">
+
+                            <div data-bind="foreach:Files">
+
+                                @*<div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">*@
+
+                                <button type="button" data-bind="click:$root.FileExample" id="btn" class="btn btn-app appbtn  ">
+                                    <div class="first" id="first">
+
+                                        <div class="Clean" data-bind="attr: { id: Id }">
+
+                                            @*<img class="" style="cursor:pointer" width="120" height="120" data-bind="attr: {src: FileExtensionIconPath()">*@
+                                            <img class="img-rounded " style="cursor:pointer;width:50px;height:50px" data-bind="attr: {src: FileExtensionIconPath}">
+                                            @*<img src="~/Images/image.png" style="width:50px;height:50px" data-bind="visible:FileExtension()=='.jpg'" />
+                                                <img src="~/Images/mp3.png" style="width:50px;height:50px" data-bind="visible:FileExtension()=='.mp3'" />
+                                                <img src="~/Images/video.png" style="width:50px;height:50px" data-bind="visible:FileExtension()=='.mp4'" />
+                                                <img src="~/Images/doc.png" style="width:50px;height:50px" data-bind="visible:FileExtension()=='.pdf' || '.docx' " />*@
+
+                                        </div>
+
+                                        <span class=""><span data-bind="text:Name"></span> <span data-bind="text:FileExtension"></span></span>
+                                    </div>
+                                </button>
+                                @*<br />
+                                    <div class="clearfix"></div>*@
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group col-lg-7" id="modal_footer_id">
+                        @*<input type="button" data-bind="" name="Save" class="btn btn-success" value="Save" id="save">
+                            <input type="button" data-bind="" name="Reset" value="Cancel" id="cancel" class="btn btn-default">*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info boxes -->
+
+    <script type="text/html" id="mode-button-template">
+        <span class="glyphicon glyphicon-plus" data-bind="text:$root.ItemModeOfButton"></span>
+    </script>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- Main row -->
+    <!-- /.row -->
+</section>
+
+@if (Request.IsAjaxRequest())
+{
+    @*<script src="~/Scripts/App/Globals/Riddha.Globals.ko.js"></script>*@
+    <script type="text/javascript">
+      
+      
+        ko.cleanNode(document.getElementById("load_file_manager"));
+
+        var fileMang = new FileManagerController();
+        ko.applyBindings(fileMang, document.getElementById("load_file_manager"));
+
+
+    </script>
+}
+else
+{
+    @section scripts
+    {
+        @*<script src="~/Scripts/App/Globals/Riddha.Globals.ko.js"></script>*@
+
+        <script type="text/javascript">
+         
+            ko.cleanNode(document.getElementById("partial-render"));
+
+            var fileMang = new FileManagerController();
+            ko.applyBindings(fileMang, document.getElementById("partial-render"));
+
+
+        </script>
+    }
+
+
+}
+
+

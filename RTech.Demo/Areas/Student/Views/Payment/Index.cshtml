@@ -1,0 +1,128 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.PaymentViewModel
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message", 0);
+        };
+    </script>
+}
+<!--  Start -->
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Code)
+    @Html.HiddenFor(model => model.Amount)
+    @Html.HiddenFor(model => model.SubTotal)
+    @Html.HiddenFor(model => model.Total)
+    @Html.HiddenFor(model => model.CourseName)
+
+    <section class="uk-section uk-section-muted    uk-animation-fade ">
+        <div class="uk-container">
+            <div class="uk-dashboard-wrapper">
+                <div class="uk-db-header  ">
+                    <h3>Payment</h3>
+                </div>
+                <div class="uk-db-border uk-bg-white uk-padding">
+                    <div class="uk-grid-medium uk-child-width-expand@s payment uk-text-left" uk-grid>
+                        <div class="uk-db-border uk-bg-white uk-padding uk-accordion-content">
+                            <div class="uk-grid-small" uk-grid>
+                                <div class="uk-width-1-1@s">
+                                    <h3>Card Details</h3>
+                                    @Html.ValidationMessageFor(model => model.CourseName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-1@s">
+                                    <label class="uk-margin-small-bottom uk-display-block"><span class="uk-text-danger">*</span> Card Number <span class="uk-display-block uk-text-small"> (Do not include hyphens or space)</span></label>
+                                    @Html.TextBoxFor(model => model.CardNumber, "", new { @class = "uk-input", @placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-1">
+                                    <label><span class="uk-text-danger">*</span>  Expiry Date</label>
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    @Html.DropDownListFor(model => model.CardExpMonth, (IEnumerable<SelectListItem>)ViewBag.Months, "Month", new { @class = "uk-select" })
+                                    @Html.ValidationMessageFor(model => model.CardExpMonth, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-2@s">
+                                    @Html.DropDownListFor(model => model.CardExpYear, (IEnumerable<SelectListItem>)ViewBag.Years, "Year", new { @class = "uk-select" })
+                                    @Html.ValidationMessageFor(model => model.CardExpYear, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-1@s">
+                                    <label class="uk-margin-small-bottom uk-display-block"><span class="uk-text-danger">*</span>  Cardholder's Name  <span class="uk-display-block uk-text-small">(Name as it appears on the card)</span></label>
+                                    @Html.TextBoxFor(model => model.NameOnCard, new { @class = "uk-input", @placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.NameOnCard, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    <label class="uk-margin-small-bottom uk-display-block"><span class="uk-text-danger">*</span>  Security Code</label>
+                                    @Html.TextBoxFor(model => model.CardSecurityKey, "", new { @class = "uk-input", @placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.CardSecurityKey, "", new { @class = "text-danger" })
+                                </div>
+
+
+                            </div>
+                            <div class="uk-text-center uk-margin-medium-top">
+                                <hr>
+                                <button type="submit" class="uk-button uk-button-primary"><i class="fa fa-check"></i> Complete Payment</button>
+                                <button type="submit" class="uk-button uk-icon-left uk-button-primary"><i class="fa fa-paypal"></i> Pay with PayPal</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="uk-card uk-card-default uk-card-small tm-ignore-container">
+                                <section class="uk-card-body">
+                                    <h4 class="uk-text-primary">Order Item</h4>
+                                    <div class=" " uk-grid>
+                                        <div class="uk-width-expand">
+                                            <div class="uk-text-bold">@Model.CourseName</div>
+                                            <p class="uk-margin-remove">@Model.Language</p>
+                                        </div>
+                                        <div class="uk-text-right">
+                                            <div>$@Model.Amount</div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <hr>
+                                <section class="uk-card-body">
+
+                                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                        <div class="uk-width-expand">
+                                            <div class="uk-text-bold">Total</div>
+                                        </div>
+                                        <div class="uk-text-right">
+                                            <div class="uk-text-lead uk-text-bolder">$@Model.Total</div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+
+
+                <div class="uk-db-footer  uk-padding-small">
+                    <a href="@Url.Action("Index","Dashboard", new { @Area= "Student"})" class="uk-button  uk-button-danger uk-border-pill"><span uk-icon="chevron-left"></span>Back</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    
+}
+
+
+
+

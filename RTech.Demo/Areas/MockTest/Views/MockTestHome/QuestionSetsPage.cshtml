@@ -1,0 +1,81 @@
+﻿@model List<RTech.Demo.Areas.MockTest.ViewModels.MockTestQuestionSetsViewModel>
+@{
+    ViewBag.Title = "QuestionSetsPage";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+@{
+    bool unScoredExist = Model.Where(x => x.IsUnscored == true).ToList().Count() > 0 ? true : false;
+    bool scoredExist = Model.Where(x => x.IsUnscored == false).ToList().Count > 0 ? true : false;
+}
+
+
+<section class="uk-section uk-section-muted    uk-animation-fade ">
+
+    <div class="uk-container">
+
+        <div class="uk-dashboard-wrapper">
+            <div class="uk-db-header ">
+                <h3>Question Sets</h3>
+            </div>
+            <div class="uk-db-border uk-padding uk-bg-white ">
+
+                <table class="uk-table uk-table-striped ">
+                    <thead>
+                        <tr>
+                            <th>SN.</th>
+                            <th>Question Set Title</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{ int i = 0;}
+                        @foreach (var item in Model)
+                        {
+                            i++;
+
+                        <tr>
+                            <td>@i</td>
+                            <td> @item.QuestionSetTitle</td>
+                            <td>@item.StartDate</td>
+                            <td>@item.EndDate</td>
+                            @if (item.isTaken == true)
+                            {
+                                <td>Test Taken &nbsp; <a href="@Url.Action("ResetTest","MockTestHome", new { @questionSetId= item.QuestionSetId})" class="uk-button  uk-button-primary uk-border-pill">Reset</a> </td>
+                            }
+                            else
+                            {
+                                <td><a href="@Url.Action("ConversationsList","RealTest", new {@Area = "MockTest", @dialogueId = item.QuestionSetId})" class="uk-button  uk-button-primary uk-border-pill">View Conversations<i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
+
+                                @*<td><a href="@Url.Action("PrepareForTest","RealTest", new { @Area="MockTest", @mockTestQuestionMasterId= item.Id})" class="uk-button  uk-button-primary uk-border-pill">Start Test<i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>*@
+
+
+                            }
+
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="uk-db-footer uk-text-center uk-padding-small">
+                <a href="@Url.Action("Index","Dashboard", new { @Area="Student"})" class="uk-button  uk-button-danger uk-border-pill"><span uk-icon="chevron-left"></span>Back</a>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+    </script>
+}
+

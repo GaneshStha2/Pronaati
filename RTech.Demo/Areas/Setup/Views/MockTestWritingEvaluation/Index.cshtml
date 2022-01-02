@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout_Adminlte.cshtml";
+}
+
+
+<section class="content-header">
+    <h1>
+        @T("Mock Test Writing Evaluation")
+        <sup class="text-blue">@T("Creation")</sup>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> @T("Home")</a></li>
+        <li class="active">@T("Setup")</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="modal" id="WritingEvaluationModel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <header><h4 class="text-primary">@T("MockTest Writing Evaluation")</h4></header>
+                </div>
+                <div class="modal-body">
+                    <div class="row" data-bind="with:MockTestWritingEvalutaion">
+                        <div class="col-lg-12">
+                            <div class="col-lg-12 form-group">
+                                <div >
+                                    <label class="col-lg-4 control-label" for="Number">@T("Package Name")</label>
+                                    <div class="col-lg-7">
+                                        <label data-bind="text:PackageName"></label>
+                                        @*<textarea type="text" class="form-control" style="resize: vertical" data-bind="value:PackageName"></textarea>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <div >
+                                    <label class="col-lg-4 control-label" for="Number">@T("Question Set Name")</label>
+                                    <div class="col-lg-7">
+                                        <label data-bind="text:QuestionSetName"></label>
+                                        @*<textarea type="text" class="form-control" style="resize: vertical" data-bind="value:QuestionSetName"></textarea>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <div>
+                                    <label class="col-lg-4 control-label" for="Number">@T("Student Name")</label>
+                                    <div class="col-lg-7">
+                                        <label data-bind="text:StudentName"></label>
+                                        @*<textarea type="text" class="form-control" style="resize: vertical" data-bind="value:StudentName"></textarea>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label class="col-lg-4 control-label" for="Number">@T("Question") </label>
+                                <div class="col-lg-7">
+                                    <label data-bind="text:QuestionText"></label>
+                                    @*<textarea type="text" class="form-control" style="resize: vertical" data-bind="value:QuestionText"></textarea>*@
+                                </div>
+                            </div>
+                            <div class="col-lg-12 form-group">
+
+
+
+                                <label class="col-lg-4 control-label" for="Number">@T("Answer") </label>
+                                <div class="col-lg-7">
+                                    <textarea type="text" class="form-control" style="resize: vertical; width:100%;" data-bind="value:AnswerText" rows="7" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <label class="col-lg-4 control-label" for="Number">@T("Marks Obtained") </label>
+                                <div class="col-lg-7">
+                                    <input type="number"  style="width:25%;" class="form-control" data-bind="value:ObtainedMarks" /><b style="color:red;">(Full Marks : 90)</b>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group col-lg-7">
+                            <input type="button" data-bind="click:CreateUpdate,createUpdateText:ModeOfButton" name="Save" class="btn btn-primary" value=@T("Save") />
+                            @*<input type="button" data-bind="click:Reset" name="Reset" value=@T("Reset") class="btn btn-default" />*@
+                            <input type="button" id="close" data-bind="click:CloseModal" value=@T("Back") class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- User Modal -->
+    <!-- Info boxes -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+
+                <div class="box-header">
+                    <div class="btn-group">
+                        @*<button type="button" class="btn btn-default " data-bind="click:ShowModal,actionVisibility:'130'"><i class="fa fa-plus-square text-green">&nbsp;@T("Create")</i></button>*@
+                        <button type="button" class="btn btn-default " data-bind="click:Select,actionVisibility:'131'"><i class="fa fa-pencil text-blue">&nbsp;@T("Edit")</i></button>
+                     @*   <button type="button" class="btn btn-default " data-bind="click:Delete,actionVisibility:'132'"><i class="fa fa-trash text-red">&nbsp;@T("Delete")</i></button>*@
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-12" data-bind="kendoGrid:KendoGridOptions">
+                            <div id="WritingEvaluationKendoGrid">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="mode-button-template">
+        <span class="glyphicon glyphicon-plus" data-bind="text:$root.ModeOfButton"></span>
+    </script>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- Main row -->
+    <!-- /.row -->
+</section>
+
+
+@if (Request.IsAjaxRequest())
+{
+    @*<script src="~/Scripts/bootstrap-strength-meter.js"></script>*@
+    @*<script src="~/Areas/User/Scripts/Riddha.Script.User.Model.js"></script>
+        <script src="~/Areas/User/Scripts/Riddha.Script.User.Controller.js"></script>*@
+    <script type="text/javascript">
+        Riddha.global.permission.action('72').done(function (data) {
+            Riddha.global.permission.actions = data.Data;
+            ko.cleanNode(document.getElementById("partial-render"));
+            var obj = new mockTestWritingEvalutaionController();
+            ko.applyBindings(obj, document.getElementById("partial-render"));
+        });
+    </script>
+}
+else
+{
+    @section scripts
+    {
+        <script type="text/javascript">
+            Riddha.global.permission.action('72').done(function (data) {
+                Riddha.global.permission.actions = data.Data;
+                ko.cleanNode(document.getElementById("partial-render"));
+                var obj = new mockTestWritingEvalutaionController();
+                ko.applyBindings(obj, document.getElementById("partial-render"));
+            });
+        </script>
+    }
+}

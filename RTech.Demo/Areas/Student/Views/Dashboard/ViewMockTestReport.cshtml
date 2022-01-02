@@ -1,0 +1,119 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.MockTestReportViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PRONAATI</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            font-size: 17px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0 0 10px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        b {
+            font-weight: bold;
+        }
+
+        .wrapper {
+            max-width: 650px;
+            width: 100%;
+            margin: 0 auto;
+            background: #ffffff;
+            border: solid 1px #eee;
+            padding: 30px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+            table tr, td, th {
+                padding: 4px 0;
+            }
+
+        p {
+            line-height: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <p style="margin-bottom: 20px;"><b>Dear @Model.StudentFirstName,</b></p>
+                            <p>Thank you for sitting a Credentialed Community Language Test in @Model.Language on @Model.TestDate. The results for the test are as follows:</p>
+                        </td>
+                    </tr>
+                    @{
+                        foreach (var item in Model.Scores)
+                        {
+                            <tr>
+                                <td><b>@Model.MockTestName: </b></td>
+                                <td> @item.DialogueName : @item.DialogueScore / 45 (minimum 29) </td>
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        <td><b>Overall (minimum 63)</b></td>
+                        <td>Mark @Model.OverallScore/90</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+            @{
+
+                if (Model.OverallScore >= 63 && Model.Scores.Where(x => x.DialogueScore < 29).Count() <= 0)
+                {
+                    <p>Congratulation on passing the Mock Test</p>
+
+                }
+
+                else
+                {
+                    <p>You are fail in this Mock Test as you haven't received the enough marks to pass. Please try again. Good Luck</p>
+                }
+            }
+            <hr />
+
+            <h5><b>Feedbacks</b> </h5>
+            @{
+                foreach (var item in Model.FeedBacks)
+                {
+                    <p>
+                        @item
+                    </p>
+                }
+            }
+
+
+
+
+            <div style="clear: both;">
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</body>
+</html>
+

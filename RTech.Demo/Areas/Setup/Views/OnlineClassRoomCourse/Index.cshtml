@@ -1,0 +1,829 @@
+﻿@{
+
+    ViewBag.Title = "Index";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout_Adminlte.cshtml";
+
+    string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<style>
+    /*#OnlineClassRoomCourseCreationModel {
+        height: 900px !important;
+        overflow-y: auto !important;
+    }*/
+
+
+
+    #load_file_manager {
+        height: 400px !important;
+        overflow-y: auto !important;
+    }
+
+    #FileForClassRoom {
+        max-height: 300px !important;
+        overflow-y: auto !important;
+    }
+
+    #DescriptionDiv {
+        max-height: 300px !important;
+        overflow-y: auto !important;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        @T("Online Classroom Course")
+        <sup class="text-blue">@T("Setup")</sup>
+
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> @T("Setup")</a></li>
+        <li class="active">@T("Online Classroom Course")</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <div class="modal" id="fileManager" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bind="click:$root.CloseFileManager" aria-hidden="true">&times;</button>
+                    <header><h4 class="text-blue">@T("Online Classroom Course Setup")</h4></header>
+                </div>
+                <div class="modal-body" id="load_file_manager">
+
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <input type="button" data-bind="" name="Save" class="btn btn-success " value="Save" id="save">
+                        <input type="button" data-bind="click:$root.CloseFileManager" name="Reset" value="Cancel" id="cancel" class="btn btn-default ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bank Modal -->
+    <div class="modal" id="OnlineClassRoomCourseCreationModel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <header><h4 class="text-blue">@T("Online Classroom Course")</h4></header>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-horizontal" data-bind="with:OnlineClassRoomCourse">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-12 form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Code")</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" data-bind="value:Code,event:{change : $root.CheckUniqueCode},enable:$root.ModeOfButton()== 'Create'" maxlength="10" />
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12  form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Name")</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" data-bind="value:Name" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-12  form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Course Type")</label>
+                                        <div class="col-lg-7">
+                                            <select class="form-control" data-bind="options:$root.CourseTypes,optionsValue:'Id',optionsText:'Name',optionsCaption:Riddha.UI.getOptionCaption(),value:CourseTypeId"></select>
+                                        </div>
+                                    </div>
+                                    <div class=" col-lg-12 form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Duration (Days)")</label>
+                                        <div class="col-lg-7">
+                                            <input class="form-control" data-bind="value:Duration , mask :'amount'" type="number" />
+                                        </div>
+                                    </div>
+
+                                    <div class=" col-lg-12 form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Price")</label>
+                                        <div class="col-lg-7">
+                                            <input class="form-control" data-bind="value:Price , mask :'amount'" type="number" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6  form-group">
+                                    <label class="col-lg-5 control-label" for="Number">@T("Photo") </label>
+                                    <div class="col-lg-7">
+                                        <img class="img-rounded " style="cursor:pointer" width="120" height="120" data-bind="attr: {src: ImageURL() || '/Images/NoImage.png'}">
+                                        <label class="btn btn-success btn-file col-lg-12">
+                                            Browse <input data-bind="click:$root.OpenFileManager" type="file" value=" " class="btn btn-flat btn-file btn-success">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class=" col-lg-12 form-group">
+                                    <label class="col-lg-12 left" for="Number">@T("Description")</label>
+                                    <div class="col-lg-12">
+                                        @*<textarea type="text" class="form-control" data-bind="value:Description"> </textarea>*@
+                                        <textarea id="element1" style="resize: vertical" class="form-control" placeholder="Description" data-bind="ckeditor:Description"></textarea>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <!--Add File Table for Online Classroom course-->
+                        <div class="col-lg-12">
+
+                            <h5 class="text-blue">Choose & Add Files For Online Classroom Course</h5>
+                            <div class="row table-responsive col-lg-12 ">
+                                <div class="" id="FileForClassRoom">
+                                    <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                        <thead class="primary bg-blue">
+                                            <tr>
+                                                <th class="text-center col-lg-2">SN</th>
+                                                <th class="col-lg-4">File Name</th>
+                                                <th class="col-lg-4">File Type</th>
+                                                <th class="col-lg-3">File</th>
+                                                <th class="col-lg-3">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach:$root.OnlineClassRoomCourseDetails">
+                                            <tr>
+                                                @*<td data-bind="text:Id"></td>*@
+                                                <td class="text-center" data-bind="text:$index()+1" style="width:100px;"></td>
+                                                <td data-bind="text:FileName"></td>
+                                                <td data-bind="text:FileTypeName"></td>
+                                                <td> <a class="btn btn-primary" data-bind="attr: {href: FileUrl() , target:'_blank'}">Open File </a></td>
+                                                <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.RemoveSelectedFile">Remove</button> </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr data-bind="with:OnlineClassRoomCourseDetail">
+
+                                                <td></td>
+                                                <td data-bind="text:FileName"></td>
+                                                <td>
+                                                    <select class="form-control"
+                                                            data-bind="options:$root.FileTypes,
+                                                    optionsValue:'Id',
+                                                    optionsText:'Name',
+                                                    optionsCaption:'Select File Type',value:FileType"></select>
+                                                </td>
+                                                <td>
+                                                    <label class="btn btn-success btn-file col-lg-12">
+                                                        Browse
+                                                        <input data-bind="click:$root.OpenFileManager" type="file" value="" class="btn btn-flat btn-success">
+
+                                                        @*<input type="button"  data-bind="click:$root.OpenFileManager" value=@T("Browse") class="btn btn-flat btn-file btn-success" />*@
+                                                    </label>
+
+                                                </td>
+                                                <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddNewFile">Add </button> </td>
+                                            </tr>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-7">
+
+                                <input type="checkbox" data-bind="checked:$root.OnlineClassRoomCourse().IsPracticeEnabled,event:{ change: $root.EnablePractice}">
+                                <label class="text-blue">Enable Practice Module </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!--Add File Table for Online Classroom course End-->
+                    @*Practice Questions*@
+
+                    <!-- Practice Module Question Selection -->
+
+
+                </div>
+                <div class="col-lg-12" id="Practice">
+
+                    <h5 class="text-blue">Practice Module For Online Classroom Course</h5>
+                    <div class="row table-responsive col-lg-12 ">
+                        <ul class="nav nav-tabs">
+
+                            <li class="nav-item active">
+                                <a class="nav-link show active" data-toggle="tab" href="#tabVocab">Vocabulary & Pronunciation Booster</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link show" data-toggle="tab" href="#tabSynonym">Synonym Booster</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link show" data-toggle="tab" href="#tabCollocation">Booster Collocation</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link show" data-toggle="tab" href="#tabMasterTopic">Master Topic Sentence</a>
+                            </li>
+
+
+                        </ul>
+
+                        <div id="myTabs" class="tab-content">
+
+                            <div class="tab-pane active" id="tabVocab">
+                                @*  <h3>Vocabulary & Pronunciation Booster</h3>*@
+                                <div class="row table-responsive col-lg-12 ">
+                                    <div class="">
+                                        <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                            <thead class="primary bg-blue">
+                                                <tr>
+                                                    <td colspan="3" align="center"><h4>Choose Question</h4></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center col-lg-1">Question Id</th>
+                                                    <th class="col-lg-2">Question</th>
+                                                    <th class="col-lg-1">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:$root.CreateVocabList">
+                                                <tr>
+                                                    <td data-bind="text:Id"></td>
+                                                    <td data-bind="text:Question"></td>
+                                                    <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.RemoveVocab">Remove</button> </td>
+
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr data-bind="with:$root.Vocab">
+                                                    <td></td>
+                                                    <td>
+                                                        <select class="form-control" data-bind="options:$root.VocabList,
+                                optionsValue:'Id',optionsText:'Question',
+                                optionsCaption:Riddha.UI.getOptionCaption(),value:Id"></select>
+                                                    </td>
+                                                    <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddNewVocab">Add </button> </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tabSynonym">
+                                @* <h3>Synonym Booster</h3>*@
+                                <div class="row table-responsive col-lg-12 ">
+                                    <div class="">
+                                        <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                            <thead class="primary bg-blue">
+                                                <tr>
+                                                    <td colspan="3" align="center"><h4>Choose Question</h4></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center col-lg-1">Question Id</th>
+                                                    <th class="col-lg-2">Question</th>
+                                                    <th class="col-lg-1">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:$root.CreateSynonymBoosterList">
+                                                <tr>
+                                                    <td data-bind="text:Id"></td>
+                                                    <td data-bind="text:Question"></td>
+                                                    <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.RemoveSynonymBooster">Remove</button> </td>
+
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr data-bind="with:$root.SynonymBooster">
+                                                    <td></td>
+                                                    <td>
+                                                        <select class="form-control" data-bind="options:$root.SynonymBoosterList,
+                                optionsValue:'Id',optionsText:'Question',
+                                optionsCaption:Riddha.UI.getOptionCaption(),value:Id"></select>
+                                                    </td>
+                                                    <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddNewSynonymBooster">Add </button> </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tabCollocation">
+                                @*<h3>Booster Collocation</h3>*@
+                                <div class="row table-responsive col-lg-12 ">
+                                    <div class="">
+                                        <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                            <thead class="primary bg-blue">
+                                                <tr>
+                                                    <td colspan="3" align="center"><h4>Choose Question</h4></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center col-lg-1">Question Id</th>
+                                                    <th class="col-lg-2">Question</th>
+                                                    <th class="col-lg-1">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:$root.CreateBoosterCollocationList">
+                                                <tr>
+                                                    <td data-bind="text:Id"></td>
+                                                    <td data-bind="text:Question"></td>
+                                                    <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.RemoveBoosterCollocation">Remove</button> </td>
+
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr data-bind="with:$root.BoosterCollocation">
+                                                    <td></td>
+                                                    <td>
+                                                        <select class="form-control" data-bind="options:$root.BoosterCollocationList,
+                                optionsValue:'Id',optionsText:'Question',
+                                optionsCaption:Riddha.UI.getOptionCaption(),value:Id"></select>
+                                                    </td>
+                                                    <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddNewBoosterCollocation">Add </button> </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tabMasterTopic">
+                                @*<h3>Master Topic Sentence</h3>*@
+                                <div class="row table-responsive col-lg-12 ">
+                                    <div class="">
+                                        <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                            <thead class="primary bg-blue">
+                                                <tr>
+                                                    <td colspan="3" align="center"><h4>Choose Question</h4></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center col-lg-1">Question Id</th>
+                                                    <th class="col-lg-2">Question</th>
+                                                    <th class="col-lg-1">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:$root.CreateMasterTopicSentenceList">
+                                                <tr>
+                                                    <td data-bind="text:Id"></td>
+                                                    <td data-bind="text:Question"></td>
+                                                    <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.RemoveMasterTopicSentence">Remove</button> </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr data-bind="with:$root.MasterTopicSentence">
+                                                    <td></td>
+                                                    <td>
+                                                        <select class="form-control" data-bind="options:$root.MasterTopicSentenceList,
+                                optionsValue:'Id',optionsText:'Question',
+                                optionsCaption:Riddha.UI.getOptionCaption(),value:Id"></select>
+                                                    </td>
+                                                    <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddNewMasterTopicSentence">Add </button> </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Practice Module Question Selection End-->
+                @*Modal Footer*@
+                <div class="modal-footer">
+                    <div class="form-group col-lg-7">
+
+                        <input type="submit" data-bind="click:$root.CreateUpdate ,$root.createUpdateText:ModeOfButton" name="Save" class="btn btn-primary" value=@T("Save") />
+                        <input type="button" data-bind="click:$root.Reset" name="Reset" value=@T("Reset") class="btn btn-default" />
+                        <input type="button" id="close" data-bind="click:$root.CloseModal" value=@T("Back") class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Online Training View Screen Modal -->
+
+    <div class="modal" id="OnlineClaassRoomCourseViewModel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <header><h4 class="text-blue">@T("Online ClassRoom Course Package")</h4></header>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-horizontal" data-bind="with:OnlineClassRoomCourse">
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-12 form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Code")</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" data-bind="value:Code" maxlength="10" readonly="readonly" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12  form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Name")</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" data-bind="value:Name" readonly="readonly" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-12  form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Course Type")</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" data-bind="value:CourseTypeName" readonly="readonly" />
+                                        </div>
+
+                                    </div>
+                                    <div class=" col-lg-12 form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Duration (Days)")</label>
+                                        <div class="col-lg-7">
+                                            <input class="form-control" data-bind="value:Duration , mask :'amount'" type="text" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                    <div class=" col-lg-12 form-group">
+                                        <label class="col-lg-5 control-label" for="Number">@T("Price")</label>
+                                        <div class="col-lg-7">
+                                            <input class="form-control" data-bind="value:Price , mask :'amount'" type="text" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6  form-group">
+                                    <label class="col-lg-5 control-label" for="Number">@T("Photo") </label>
+                                    <div class="col-lg-7">
+                                        <img class="img-rounded " style="cursor:pointer" width="120" height="120" data-bind="attr: {src: ImageURL() || '/Images/logo-default.png'}">
+
+                                    </div>
+                                </div>
+                                <div class=" col-lg-12 form-group">
+                                    <label class="col-lg-12 left" for="Number">@T("Description")</label>
+                                    <div class="col-lg-12" id="DescriptionDiv">
+                                        <span data-bind="html:Description"></span>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--Files For Online Classroom For-eg :Audio , Video, Pdf -->
+                <div class="col-lg-12">
+                    <h5 class="text-blue">Files For Online ClassRoom Course</h5>
+                    <div class="row table-responsive col-lg-12 ">
+                        <div class="" id="DescriptionDiv">
+                            <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                <thead class="primary bg-blue">
+                                    <tr>
+                                        <th class="text-center col-lg-2">SN</th>
+                                        <th class="col-lg-4">File Name</th>
+                                        <th class="col-lg-4">File Type</th>
+                                        <th class="col-lg-3">File</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:$root.OnlineClassRoomCourseDetails">
+                                    <tr>
+                                        @*<td data-bind="text:Id"></td>*@
+                                        <td class="text-center" data-bind="text:$index()+1" style="width:100px;"></td>
+                                        <td data-bind="text:FileName"></td>
+                                        <td data-bind="text:FileTypeName"></td>
+                                        @*<td data-bind="text:FileUrl" ></td>*@
+                                        <td> <a class="btn btn-primary" data-bind="attr: {href: FileUrl() , target:'_blank'}">Open File </a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Files For Online Classroom  end-->
+                <!--Practice Module View -->
+
+                <div class="col-lg-12">
+                    <h5 class="text-blue">Practice Module For Online ClassRoom Course</h5>
+                    <div class="row table-responsive col-lg-12 ">
+                        <ul class="nav nav-tabs">
+
+                            <li class="nav-item active">
+                                <a class="nav-link show active" data-toggle="tab" href="#tabVocabView">Vocabulary & Pronunciation Booster</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link show" data-toggle="tab" href="#tabSynonymView">Synonym Booster</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link show" data-toggle="tab" href="#tabCollocationView">Booster Collocation</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link show" data-toggle="tab" href="#tabMasterTopicView">Master Topic Sentence</a>
+                            </li>
+
+
+                        </ul>
+
+                        <div id="myTabs" class="tab-content">
+
+                            <div class="tab-pane active" id="tabVocabView">
+                                @*  <h3>Vocabulary & Pronunciation Booster</h3>*@
+                                <div class="row table-responsive col-lg-12 ">
+                                    <div class="">
+                                        <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                            <thead class="primary bg-blue">
+                                                <tr>
+                                                    <td colspan="3" align="center"><h4>Vocabulary & Pronunciation Booster Question</h4></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center col-lg-1">Question Id</th>
+                                                    <th class="col-lg-2">Question</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:$root.CreateVocabList">
+                                                <tr>
+                                                    <td data-bind="text:Id"></td>
+                                                    <td data-bind="text:Question"></td>
+
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tabSynonymView">
+                                @* <h3>Synonym Booster</h3>*@
+                                <div class="row table-responsive col-lg-12 ">
+                                    <div class="">
+                                        <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                            <thead class="primary bg-blue">
+                                                <tr>
+                                                    <td colspan="3" align="center"><h4>Synonym  Booster Question</h4></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center col-lg-1">Question Id</th>
+                                                    <th class="col-lg-2">Question</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:$root.CreateSynonymBoosterList">
+                                                <tr>
+                                                    <td data-bind="text:Id"></td>
+                                                    <td data-bind="text:Question"></td>
+
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tabCollocationView">
+                                @*<h3>Booster Collocation</h3>*@
+                                <div class="row table-responsive col-lg-12 ">
+                                    <div class="">
+                                        <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                            <thead class="primary bg-blue">
+                                                <tr>
+                                                    <td colspan="3" align="center"><h4>Booster Collocation Question</h4></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center col-lg-1">Question Id</th>
+                                                    <th class="col-lg-2">Question</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:$root.CreateBoosterCollocationList">
+                                                <tr>
+                                                    <td class="text-center" data-bind="text:$index()+1" style="width:100px;"></td>
+                                                    <td data-bind="text:Question"></td>
+
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="tabMasterTopicView">
+                                @*<h3>Master Topic Sentence</h3>*@
+                                <div class="row table-responsive col-lg-12 ">
+                                    <div class="">
+                                        <table class="table table-condensed table-bordered table-striped no-padding table-hover">
+                                            <thead class="primary bg-blue">
+                                                <tr>
+                                                    <td colspan="3" align="center"><h4>Master Topic Question</h4></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center col-lg-1">Question Id</th>
+                                                    <th class="col-lg-2">Question</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:$root.CreateMasterTopicSentenceList">
+                                                <tr>
+                                                    <td class="text-center" data-bind="text:$index()+1" style="width:100px;"></td>
+                                                    <td data-bind="text:Question"></td>
+
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Practice Module View End-->
+
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="form-group col-lg-7">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Online Training View Screen Modal  End-->
+    <!-- Info boxes -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    &nbsp;
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <div class="btn-group">
+
+                            <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-wrench"></i>
+                            </button>
+                            <ul class="dropdown-menu" role="menu"></ul>
+                        </div>
+                        <button type="button" class="btn btn-box-tool text-red" data-widget="remove"><i class="fa fa-times"></i></button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default " data-bind="click:ShowModal,actionVisibility:'06'" style="display: inline-block;"><i class="fa fa-plus-square text-green">&nbsp;@T("Create")</i></button>
+                        <button type="button" class="btn btn-default " data-bind="click:Select,actionVisibility:'07'" style="display: inline-block;"><i class="fa fa-pencil text-blue">&nbsp;@T("Edit")</i></button>
+                        <button type="button" class="btn btn-default " data-bind="click:Delete,actionVisibility:'08'" style="display: inline-block;"><i class="fa fa-trash text-red">&nbsp;@T("Delete")</i></button>
+                        <button type="button" class="btn btn-default " data-bind="click:View,actionVisibility:'09'" style="display: inline-block;"><i class="fa fa-eye text-green">&nbsp;@T("View")</i></button>
+
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-12" data-bind="kendoGrid:KendoGridOptions">
+                            <div id="OnlineClassRoomCourse">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="mode-button-add-template">
+        <span class="glyphicon glyphicon-plus"></span>
+    </script>
+    <script type="text/html" id="mode-button-update-template">
+        <span class="glyphicon glyphicon-arrow-up"></span>
+    </script>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- Main row -->
+    <!-- /.row -->
+</section>
+
+@if (Request.IsAjaxRequest())
+{
+    <script src="~/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js"></script>
+    <script src="~/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script type="text/javascript">
+        var obj = {};
+        Riddha.global.permission.action('2').done(function (data) {
+            Riddha.global.permission.actions = data.Data;
+            ko.cleanNode(document.getElementById("partial-render"));
+            obj = new OnlineClassRoomCourseController();
+            ko.applyBindings(obj, document.getElementById("partial-render"));
+        });
+    </script>
+
+
+}
+else
+{
+    @section scripts
+    {
+        <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+        <script type="text/javascript">
+            var obj = {};
+            Riddha.global.permission.action('2').done(function (data) {
+                Riddha.global.permission.actions = data.Data;
+                ko.cleanNode(document.getElementById("partial-render"));
+                obj = new OnlineClassRoomCourseController();
+                ko.applyBindings(obj, document.getElementById("partial-render"));
+            });
+        </script>
+
+        <script>
+            $(function () {
+                //$(".textarea").wysihtml5();
+                //$('input').iCheck({
+                //    checkboxClass: 'icheckbox_square',
+                //    radioClass: 'iradio_square',
+                //    increaseArea: '20%' // optional
+                //});
+                //$("#compose-textarea").wysihtml5();
+                //Enable iCheck plugin for checkboxes
+                //iCheck for checkbox and radio inputs
+                $('.mailbox-messages input[type="checkbox"]').iCheck({
+                    checkboxClass: 'icheckbox_flat-blue',
+                    radioClass: 'iradio_flat-blue'
+                });
+
+                //Enable check and uncheck all functionality
+                $(".checkbox-toggle").click(function () {
+                    var clicks = $(this).data('clicks');
+                    if (clicks) {
+                        //Uncheck all checkboxes
+                        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+                        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+                    } else {
+                        //Check all checkboxes
+                        $(".mailbox-messages input[type='checkbox']").iCheck("check");
+                        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+                    }
+                    $(this).data("clicks", !clicks);
+                });
+
+                //Handle starring for glyphicon and font awesome
+                $(".mailbox-star").click(function (e) {
+                    e.preventDefault();
+                    //detect type
+                    var $this = $(this).find("a > i");
+                    var glyph = $this.hasClass("glyphicon");
+                    var fa = $this.hasClass("fa");
+
+                    //Switch states
+                    if (glyph) {
+                        $this.toggleClass("glyphicon-star");
+                        $this.toggleClass("glyphicon-star-empty");
+                    }
+
+                    if (fa) {
+                        $this.toggleClass("fa-star");
+                        $this.toggleClass("fa-star-o");
+                    }
+                });
+
+                //$("#editor").wysihtml5();
+            });
+        </script>
+    }
+
+
+}
+
+
+
+

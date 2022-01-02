@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "TimeEnded";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";   
+}
+
+<section class="uk-section-large uk-section-muted uk-flex uk-flex-middle uk-animation-fade">
+    <div class="uk-width-1-1">
+        <div class="uk-container">
+            <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+                <div class="uk-width-1-1@m">
+                    <div class="uk-margin uk-width-large uk-text-center uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large uk-border-radius-small">
+
+                        @* <h3 class="uk-text-success uk-margin-remove-top"><b>Oh No !</b> <br></h3>*@
+                        <p><b> Maximum test time reached. End of test </b></p>
+                        <hr>
+                        @*<a href="@Url.Action("TestSuccess", "RealTest", new { @Area = "MockTest"})" class="uk-button  uk-button-primary uk-border-pill"><b> Next <span uk-icon="chevron-right"></span></b></a>*@
+                        <a href="@Url.Action("MyNaatiMocktestList", "MockTestHome", new { @Area = "MockTest"})" class="uk-button  uk-button-primary uk-border-pill"><b> Next <span uk-icon="chevron-right"></span></b></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

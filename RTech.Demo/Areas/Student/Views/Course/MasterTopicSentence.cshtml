@@ -1,0 +1,131 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.MasterTopicSentenceViewModel
+@{
+    ViewBag.Title = "Master Topic Sentence";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+
+
+    string radioClass = "radio-danger";
+
+    string CorrectAnswer = "";
+    if (Model != null)
+    {
+        CorrectAnswer = Model.CorrectAnswer ?? "";
+    }
+}
+
+
+
+
+<!--  Start -->
+<div class="test-waraper">
+    <div class="container   ">
+        <div class="row">
+            <div class="col-lg-12 mt40">
+                <h4>Master Topic Sentence Booster</h4>
+
+                @if (Model == null)
+                {
+                    <div class="start-test">
+
+                        <div class="question">
+                            <h5>No Question Available</h5>
+                            @*<h3>@Model.Word <small>(@Model.WordType)</small></h3>*@
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                }
+                else
+                { <!--  -->
+                    <div class="start-test">
+                        <div class="question">
+                            <h5>@Model.QuestionTitle</h5>
+                            <p>@Model.Question </p>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="start-test">
+
+                        <div class="answer">
+                            <h5>@Model.OptionStatement</h5>
+
+                            <div class="checkox-area">
+
+                                @{ int i = 0;}
+                                @foreach (var item in Model.OptionsList)
+                                {
+                                    i++;
+                                    if (item.IsCorrectAnswer == true)
+                                    {
+                                        radioClass = "radio-success";
+
+                                    }
+                                    else
+                                    {
+                                        radioClass = "radio-danger";
+                                    }
+                                    <div class="radio  @radioClass">
+                                        <input type="radio" name="radio1" id="radio+@i" value="option1">
+                                        <label for="radio+@i">
+                                            @item.Options
+                                        </label>
+                                    </div>
+
+
+                                }
+                                <!--  -->
+                                @*<div class="radio  radio-danger">
+                                        <input type="radio" name="radio1" id="radio1" value="option1">
+                                        <label for="radio1">
+                                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium
+                                        </label>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="radio  radio-success">
+                                        <input type="radio" name="radio1" id="radio2" value="option1">
+                                        <label for="radio2">
+                                            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                                        </label>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="radio  radio-danger">
+                                        <input type="radio" name="radio1" id="radio3" value="option1">
+                                        <label for="radio3">
+                                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                                        </label>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="radio  radio-danger">
+                                        <input type="radio" name="radio1" id="radio4" value="option1">
+                                        <label for="radio4">
+                                            tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                                        </label>
+                                    </div>*@
+                                <!--  -->
+
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--  -->
+                }
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<div class="footer-button">
+    <div class="container">
+        <a href="avoide:javascript;" title="" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" class="ft-btn button-check">Check Answer</a> <span class="answer-text collapse" id="collapseExample">Academic : @CorrectAnswer</span>
+        <a href="" title="" class="ft-btn button-next">Next</a>
+    </div>
+</div>
+<!--  End -->

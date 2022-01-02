@@ -1,0 +1,121 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.OnlineTrainingMasterViewModel
+@{
+    ViewBag.Title = "MyOnlineTrainingDetails";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+
+<!--  Start -->
+<div class="packages_details">
+
+    <div class="container   ">
+        <div class="row">
+
+
+
+
+            <div class="col-lg-12">
+                <div class="detailstraining">
+
+
+                    <h3>Online Training</h3>
+                    <h5 style="color:#7a7e85;">@Model.Title</h5>
+                    @Html.Raw(Model.Description)
+
+                    <div class="boxshadow">
+                        <h3>PDF</h3>
+                        <!--  -->
+                        <div class="row">
+                            @foreach (var item in Model.onlineTrainingFileURLList.Where(x => x.FileExtension == ".pdf" || x.FileExtension == ".txt" || x.FileExtension == ".doc"))
+                            {
+
+
+                                <div class="col-lg-3">
+                                    <a class="pdf" href="@item.FileUrl" download="">                                        
+                                        <img src="~/Areas/Student/Images/pdf.png" />
+                                        <h3>@item.FileName</h3>
+                                    </a>
+                                </div>
+
+
+                            }
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                    <!--  -->
+                    <br><br><br>
+                    <!--  -->
+
+                    <div class="boxshadow">
+
+                        <h3>VIDEO</h3>
+                        <div class="row">
+                            @foreach (var item in Model.onlineTrainingFileURLList.Where(x => x.FileExtension == ".mp4" ))
+
+                            {
+
+                                <div class="col-lg-3">
+                                    <div class="box-wraper">
+                                        <video width="100%" controls>
+                                            <source src="@item.FileUrl" type="video/mp4">
+                                            <source src="@item.FileUrl" type="video/ogg">
+                                            Your browser does not support HTML5 video.
+                                        </video>
+
+                                        <h3>@item.FileName</h3>
+                                    </div>
+                                </div>
+
+
+
+                            }
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+
+
+                    <!--  -->
+                    <br><br><br>
+                    <!--  -->
+                    <div class="boxshadow  ">
+                        <h3>Audio</h3>
+                        <div class="row">
+                            @foreach (var item in Model.onlineTrainingFileURLList.Where(x => x.FileExtension == ".mp3" || x.FileExtension == ".mpeg" || x.FileExtension == ".ogg"))
+                            {
+
+
+                                <div class="col-lg-4">
+                                    <div class="box-wraper">
+                                        <br>
+                                        <audio controls width="100%">
+                                            <source src="@item.FileUrl" type="audio/ogg">
+                                            <source src="@item.FileUrl" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                        <h3>@item.FileName</h3>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<!--  End -->

@@ -1,0 +1,54 @@
+﻿
+@{
+    string baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pro Naati</title>
+</head>
+<body style="padding:40px;">
+    <div>
+        <div>
+            <header>
+                <div style="float:left;">
+                    <img src="@baseUrl/Areas/Student/Images/logo.png" />
+                </div>
+                <br />
+            </header>
+        </div>
+        <div>
+            <br />
+            <p> Dear Student,</p>
+            <p>Thank you for completing Scored NAATI CCL Mock Test. Here some helpful tips relating to the next stage of your test journey.</p>
+            <b>Your Test Score</b>
+            <p>Scored NAATI CCL Mock Test scores are typically received within six business days. Once your score is ready, you will receive an email notification from us or you can view your score via your PRO NAATI web account dashboard panel.</p>
+            <p>For more information on how to interpret your results, please see the NAATI CCL Score Guide: link to NAATI CCL guide in the dashboard</p>
+            <p>If, for any reason, your score is delayed, we will notify you as soon as we can. </p>
+            <p><b>Thank You! </b></p>
+            <b>Score Validity</b>
+            <br />
+            <p>Scored NAATI CCL Mock Test DOES NOT substitute the real NAATI CCL test. We will not issue paper certificates or score reports. The score will provide you a clear picture of your performance before the test conducted by the National Accreditation Authority for Translators and Interpreters (www.naati.com.au).</p>
+
+            <b>Rescheduling </b>
+            <br />
+
+            <p>If you achieved the score that you need, we recommend that you attempt the real NAATI CCL test conducted by the National Accreditation Authority for Translators and Interpreters (www.naati.com.au). </p>
+
+            <p>If you do not achieve the score that you need, we recommend that you attempt other Scored NAATI CCL Mock Test available by enroling in our website. </p>
+
+            <b>Contact Us</b>
+            <br />
+
+            <p>The Pro NAATI Customer Support team in your region will be pleased to answer any queries you may have relating to your mock test experience. </p>
+
+        </div>
+       
+    </div>
+</body>
+</html>
+
+

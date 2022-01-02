@@ -1,0 +1,49 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.PasswordResetSecurityCodeViewModel
+@{
+    ViewBag.Title = "SecurityCode";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+
+    <!--  Start -->
+    <div class="login-registration">
+        <div class="pv20">
+
+
+            <div class="container  ">
+
+
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="inner-log-reg">
+
+
+                        <h3>Enter Security Code</h3>
+                        <p>An Email has been sent to your email address with the password reset security code. Please enter the security code below to reset your password.</p>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.SecurityCode, new { @class = "form-control bg-white", @Placeholder = "Security Code" })
+                            @Html.ValidationMessageFor(model => model.SecurityCode, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!--  End -->
+}

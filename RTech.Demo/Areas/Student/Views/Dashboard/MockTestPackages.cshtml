@@ -1,0 +1,212 @@
+﻿@model List<RTech.Demo.Areas.MockTest.ViewModels.MockTestQuestionPackages>
+@{
+    ViewBag.Title = "MockTestsPage";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<div class="list-packages">
+
+    <div class="details_training ">
+
+
+
+        <div class="container  mt20 ">
+
+
+            <div class="col-lg-12">
+                <div class="slider-list row">
+
+
+                    <div class="row  ">
+
+                        @if (Model.Count() > 0)
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                <div class="col-lg-4 col-md-6 col-sm-6 colxs-12">
+                                    <div class="package-list">
+                                        <div class="package-body">
+                                            <h4>Mock Test </h4>
+                                            <div class="discription pinside20 mb10">
+                                                @*<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>*@
+                                                <p>@item.PackageName</p>
+                                            </div>
+                                            @*<ul class="list">
+                                                    <li>Lorem ipsum dolor sit amet</li>
+                                                    <li>Aenean commodo ligula eget dolor</li>
+                                                    <li>Penatibus et magnis dis</li>
+                                                    <li>Donec quam felis, ultricies nec</li>
+                                                    <li>Pretium quis, sem.</li>
+                                                </ul>*@
+                                            <hr>
+                                            <a href="@Url.Action("Index", "Payment", new { @Code = item.Code, @PaymentFor = Riddhasoft.Setup.Entity.PaymentFor.MockTestPackage })" title="" class="buy-now pull-left">Buy </a>
+                                            <div class="price">
+                                                <span class="current-price">$@item.Price</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+
+
+                            <h3>No Package Available to buy</h3>
+                        }<!--  -->
+                        @*<div class="col-lg-4 col-md-6 col-sm-6 colxs-12">
+                                <div class="package-list">
+                                    <div class="package-body">
+                                        <h4>Mock Test </h4>
+                                        <div class="discription pinside20 mb10">
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
+                                        </div>
+                                        <ul class="list">
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Aenean commodo ligula eget dolor</li>
+                                            <li>Penatibus et magnis dis</li>
+                                            <li>Donec quam felis, ultricies nec</li>
+                                            <li>Pretium quis, sem.</li>
+                                        </ul>
+                                        <hr>
+                                        <a href="@Url.Action("Index","Payment",new { @Code="QP001", @PaymentFor = Riddhasoft.Setup.Entity.PaymentFor.MockTestPackage})" title="" class="buy-now pull-left">Buy </a>
+                                        <div class="price">
+                                            <span class="current-price">$12.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-4 col-md-6 col-sm-6 colxs-12">
+                                <div class="package-list">
+                                    <div class="package-body">
+                                        <h4>Mock Test </h4>
+                                        <div class="discription pinside20 mb10">
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
+                                        </div>
+                                        <ul class="list">
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Aenean commodo ligula eget dolor</li>
+                                            <li>Penatibus et magnis dis</li>
+                                            <li>Donec quam felis, ultricies nec</li>
+                                            <li>Pretium quis, sem.</li>
+                                        </ul>
+                                        <hr>
+                                        <a href="payment.php" title="" class="buy-now pull-left">Buy </a>
+                                        <div class="price">
+                                            <span class="current-price">$12.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-4 col-md-6 col-sm-6 colxs-12">
+                                <div class="package-list">
+                                    <div class="package-body">
+                                        <h4>Mock Test </h4>
+                                        <div class="discription pinside20 mb10">
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
+                                        </div>
+                                        <ul class="list">
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Aenean commodo ligula eget dolor</li>
+                                            <li>Penatibus et magnis dis</li>
+                                            <li>Donec quam felis, ultricies nec</li>
+                                            <li>Pretium quis, sem.</li>
+                                        </ul>
+                                        <hr>
+                                        <a href="payment.php" title="" class="buy-now pull-left">Buy </a>
+                                        <div class="price">
+                                            <span class="current-price">$12.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-4 col-md-6 col-sm-6 colxs-12">
+                                <div class="package-list">
+                                    <div class="package-body">
+                                        <h4>Mock Test </h4>
+                                        <div class="discription pinside20 mb10">
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
+                                        </div>
+                                        <ul class="list">
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Aenean commodo ligula eget dolor</li>
+                                            <li>Penatibus et magnis dis</li>
+                                            <li>Donec quam felis, ultricies nec</li>
+                                            <li>Pretium quis, sem.</li>
+                                        </ul>
+                                        <hr>
+                                        <a href="payment.php" title="" class="buy-now pull-left">Buy </a>
+                                        <div class="price">
+                                            <span class="current-price">$12.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-4 col-md-6 col-sm-6 colxs-12">
+                                <div class="package-list">
+                                    <div class="package-body">
+                                        <h4>Mock Test </h4>
+                                        <div class="discription pinside20 mb10">
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
+                                        </div>
+                                        <ul class="list">
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Aenean commodo ligula eget dolor</li>
+                                            <li>Penatibus et magnis dis</li>
+                                            <li>Donec quam felis, ultricies nec</li>
+                                            <li>Pretium quis, sem.</li>
+                                        </ul>
+                                        <hr>
+                                        <a href="payment.php" title="" class="buy-now pull-left">Buy </a>
+                                        <div class="price">
+                                            <span class="current-price">$12.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-4 col-md-6 col-sm-6 colxs-12">
+                                <div class="package-list">
+                                    <div class="package-body">
+                                        <h4>Mock Test </h4>
+                                        <div class="discription pinside20 mb10">
+                                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
+                                        </div>
+                                        <ul class="list">
+                                            <li>Lorem ipsum dolor sit amet</li>
+                                            <li>Aenean commodo ligula eget dolor</li>
+                                            <li>Penatibus et magnis dis</li>
+                                            <li>Donec quam felis, ultricies nec</li>
+                                            <li>Pretium quis, sem.</li>
+                                        </ul>
+                                        <hr>
+                                        <a href="payment.php" title="" class="buy-now pull-left">Buy </a>
+                                        <div class="price">
+                                            <span class="current-price">$12.99</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--  -->
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+

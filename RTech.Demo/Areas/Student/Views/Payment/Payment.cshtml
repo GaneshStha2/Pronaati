@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = null;
+
+    var baseURL = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    https://paymentgateway.commbank.com.au/api/rest/version/50/merchant/{merchantId}/session
+
+    <!--hosted check out  -->
+    <script src="https://paymentgateway.commbank.com.au/checkout/version/50/checkout.js"></script>
+
+
+    <script type="text/javascript">
+        function errorCallback(error) {
+            console.log(JSON.stringify(error));
+        }
+        function cancelCallback() {
+            console.log('Payment cancelled');
+        }
+        function completeCallback(resultIndicator, sessionVersion) {
+            
+            //handle payment completion
+        }
+        //function successCallback() {
+        //    debugger;
+        //    alert("Hey");
+        //}
+
+
+
+
+        Checkout.configure({
+
+            //merchant: 'TESTPROSTUCOM201',
+            merchant: '353109291047516',
+            order: {
+                amount: function () {
+                    //Dynamic calculation of amount
+                    return 80 + 20;
+                },
+                currency: 'AUD',
+                description: 'Ordered goods',
+                id: '000121452002012'
+            },
+            interaction: {
+                merchant: {
+                    name: 'Rabindra',
+                    address: {
+                        line1: '1/556 Princes Highway',
+                        line2: '1/556 Princes Highway'
+                    }
+                },
+                returnUrl:"https://pronaati.com.au/"
+            },
+
+            //session: {
+            //    id: 
+            //},
+
+
+        });
+
+
+    </script>
+    <!--hosted check out end-->
+
+
+</head>
+<body>
+    ...
+    <input type="button" value="Pay with Lightbox" onclick="Checkout.showLightbox();" />
+    <input type="button" value="Pay with Payment Page" onclick="Checkout.showPaymentPage();" />
+    ...
+</body>
+</html>
+
+

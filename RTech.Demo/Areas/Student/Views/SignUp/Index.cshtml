@@ -1,0 +1,98 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.SignUpViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<!--  Start -->
+@using (Html.BeginForm("Index", "SignUp", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="uk-section uk-section-muted uk-flex uk-flex-middle uk-animation-fade" uk-height-viewport>
+        <div class="uk-width-1-1">
+            <div class="uk-container">
+                <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+
+                    <div class="uk-width-1-2@m uk-align-center">
+                        <div class="uk-margin  uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large uk-border-radius-small">
+
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="col-lg-12 text-success">
+                                    @ViewBag.Message
+
+                                </div>
+                            }
+                            <h3 class="uk-card-title uk-text-center">Sign Up</h3>
+                            <hr class="uk-divider-icon">
+
+                            <div class="uk-grid-small" uk-grid>
+
+                                <div class="uk-width-1-2@s">
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "uk-input", @placeholder = "First Name" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "uk-input", @placeholder = "Last Name" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-2@s">
+                                    @Html.EnumDropDownListFor(model => model.Gender, new { @class = "uk-input" })
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-2@s">
+                                    <input class="uk-input" id="image" name="image" type="file" value="">
+                                    @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-2@s">
+                                    @Html.DropDownListFor(model => model.BirthCountry, (IEnumerable<SelectListItem>)ViewBag.countries, "Country Of Birth", new { @class = "uk-select" })
+                                    @Html.ValidationMessageFor(model => model.BirthCountry, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-2@s">
+                                    @Html.TextBoxFor(model => model.Occupation, new { @class = "uk-input", @placeholder = "Occupation" })
+                                    @Html.ValidationMessageFor(model => model.Occupation, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    @Html.TextBoxFor(model => model.Address, new { @class = "uk-input", @placeholder = "Address" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-2@s">
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "uk-input", @placeholder = "Contact Number" })
+                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-1@s">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "uk-input", @placeholder = "Email" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-1@s">
+                                    @Html.TextBoxFor(model => model.Password, new { @class = "uk-input", @placeholder = "Password", @type = "password" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-1@s">
+                                    @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "uk-input", @placeholder = "Confirm Password", @type = "password" })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                                <div class="uk-margin uk-text-center">
+                                    <hr> <button type="submit" class="uk-button uk-button-primary " href="signup-success.php">Sign Up</button>
+                                </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<!--  End -->

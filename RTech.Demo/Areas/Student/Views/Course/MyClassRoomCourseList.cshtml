@@ -1,0 +1,53 @@
+﻿@model List<RTech.Demo.Areas.Student.ViewModels.ClassRoomCourseMasterViewModel>
+@{
+    ViewBag.Title = "MyOnlineTrainingList";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+    int index = 0;
+}
+
+
+<section class="uk-section uk-section-muted    uk-animation-fade ">
+
+    <div class="uk-container">
+
+        <div class="uk-dashboard-wrapper">
+            <div class="uk-db-header ">
+                <h3>Packages</h3>
+            </div>
+            <div class="uk-db-border uk-padding uk-bg-white ">
+
+                <table class="uk-table uk-table-striped ">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>View Package</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            index = index + 1;
+                            <tr>
+
+                                <td>@index</td>
+                                <td>@item.CourseName</td>
+                                <td>@item.CreatedDate</td>
+                                <td><a href="@Url.Action("MyClassRoomCourseDetails", "Course", new { Id = item.CourseId } )" class="uk-button  uk-button-primary uk-border-pill">View Details <i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="uk-db-footer uk-text-center uk-padding-small">
+                <a href="@Url.Action("Index", "Dashboard")" class="uk-button uk-button-small uk-button-danger"><span uk-icon="chevron-left"></span>Back</a>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+

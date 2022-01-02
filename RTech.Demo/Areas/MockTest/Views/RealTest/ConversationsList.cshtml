@@ -1,0 +1,76 @@
+﻿@model RTech.Demo.Areas.MockTest.ViewModels.ConversationsListVm
+
+
+@{
+    ViewBag.Title = "IncludedMockTests";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<!--  -->
+<section class="uk-section-small uk-bg-dark-blue uk-light  uk-text-center uk-arrow-down uk-relative  ">
+
+    <div class="uk-container  ">
+        <h2 class="uk-margin-remove uk-text-bold">@Model.DialogueTitle</h2>
+        <ul class="uk-breadcrumb uk-flex uk-flex-center">
+            <li><a href="@Url.Action("Home","TopBar", new { @Area = "Student"})">Home</a></li>
+            <li><span>@Model.DialogueTitle </span></li>
+        </ul>
+    </div>
+
+</section>
+<!--  -->
+
+<section class="uk-section uk-section-muted    uk-animation-fade ">
+
+    <div class="uk-container">
+
+        <div class="uk-dashboard-wrapper">
+            <div class="uk-db-header ">
+                <h3>Mock Test Conversations</h3>
+            </div>
+            <div class="uk-db-border uk-padding uk-bg-white ">
+
+                <table class="uk-table uk-table-striped ">
+                    <thead>
+                        <tr>
+                            <th>SN</th>
+                            <th>Title</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{ int i = 0;}
+                        @foreach (var item in Model.Converstions)
+                        {
+                            i++;
+
+                            <tr>
+                                <td>@i</td>
+                                <td> @item.Title</td>
+                                @if (item.IsTaken == true)
+                                {
+                                    <td>&nbsp; <a href="" class="uk-button  uk-button-primary uk-border-pill">Report</a></td>
+                                }
+                                else
+                                {
+                                
+                                    <td><a href="@Url.Action("PrepareForTest","RealTest", new { @Area="MockTest", @mockTestQuestionMasterId= item.Id})" class="uk-button  uk-button-primary uk-border-pill">Start Test<i class="fa fa-chevron-right" aria-hidden="true"></i></a></td>
+
+                                }
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="uk-db-footer uk-text-center uk-padding-small">
+                <a href="@Url.Action("Index","Dashboard", new { @Area="Student"})" class="uk-button  uk-button-danger uk-border-pill"><span uk-icon="chevron-left"></span>Back</a>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<!--  -->

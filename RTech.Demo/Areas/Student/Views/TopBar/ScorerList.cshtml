@@ -1,0 +1,61 @@
+﻿@model List<RTech.Demo.Areas.Student.ViewModels.ScorerViewModel>
+@{
+    ViewBag.Title = "ScorerList";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<!--  -->
+<section class="uk-section-small uk-bg-dark-blue uk-light  uk-text-center uk-arrow-down uk-relative  ">
+
+    <div class="uk-container  ">
+        <h2 class="uk-margin-remove uk-text-bold">Scores</h2>
+        <ul class="uk-breadcrumb uk-flex uk-flex-center">
+            <li><a href="@Url.Action("Home","TopBar", new { @Area= "Student"}) ">Home</a></li>
+            <li><span>Scores</span></li>
+        </ul>
+    </div>
+
+</section>
+<!--  -->
+<!--  -->
+
+<section class="uk-section ">
+    <div class="uk-container  ">
+
+        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper uk-form dt-uikit no-footer">
+            <div class="row uk-grid"><div class="uk-width-1-2"><div class="dataTables_length" id="DataTables_Table_0_length"><label>Show <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="uk-form-small"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="uk-width-1-2"><div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search:<input type="search" class="uk-form-small" placeholder="" aria-controls="DataTables_Table_0"></label></div></div></div><div class="row uk-grid dt-merge-grid">
+                <div class="uk-width-1-1">
+                    <table class="uk-table uk-table-hover uk-table-striped uk-table-searchable dataTable no-footer" style="width: 100%;" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="#: activate to sort column ascending" style="width: 117px;" aria-sort="descending">S.No</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 403px;">Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending" style="width: 287px;">Country</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Score: activate to sort column ascending" style="width: 225px;">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+
+                                foreach (var item in Model)
+                                {
+                                    i++;
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.Score</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div><div class="row uk-grid dt-merge-grid"><div class="uk-width-2-5"><div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div></div><div class="uk-width-3-5"><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate"><ul class="uk-pagination uk-pagination-right uk-flex-right"><li class="paginate_button uk-disabled disabled" id="DataTables_Table_0_previous"><span href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0"><i class="uk-icon-angle-left"></i> Previous</span></li><li class="paginate_button uk-active"><span href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0">1</span></li><li class="paginate_button uk-disabled disabled" id="DataTables_Table_0_next"><span href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0">Next <i class="uk-icon-angle-right"></i></span></li></ul></div></div></div>
+        </div>
+    </div>
+</section>
+<!--  -->

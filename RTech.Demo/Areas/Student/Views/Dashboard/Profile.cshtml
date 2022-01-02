@@ -1,0 +1,114 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.ProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<section class="uk-padding uk-section-profile    uk-animation-fade ">
+
+    <div class="uk-container">
+        <div class="uk-child-width-1-2@s uk-text-center uk-flex uk-flex-middle uk-grid" uk-grid="">
+            <!--  -->
+            <div class="uk-text-left uk-first-column">
+                <div class="uk-profile-information uk-flex uk-flex-middle">
+                    <div class="uk-profile-img">
+                        <img src="@RTech.Demo.Common.StudentSession.LoggedStudent.StudentImageUrl" alt="">
+                    </div>
+
+                    <h2 class="uk-text-bold text-white">@RTech.Demo.Common.StudentSession.LoggedStudent.StudentName<br><small class="uk-text-secondary">@Model.Email</small></h2>
+
+                </div>
+            </div>
+            <!--  -->
+            <!--  -->
+
+            <div class="uk-text-right">
+                <a href="@Url.Action("Reports","Dashboard", new { @Area = "Student"})" class="uk-button uk-button-primary">View Report</a>
+            </div>
+            <!--  -->
+
+        </div>
+
+    </div>
+</section>
+
+<section class="uk-section uk-section-small uk-section-muted    uk-animation-fade ">
+
+    <div class="uk-container">
+
+        <div class="uk-child-width-1-2@s uk-text-left  " uk-grid>
+            <!--  -->
+            <div>
+                <div class="uk-pdl-form ">
+                    <div class="uk-pdl-header-large  ">
+                        General Information
+
+                    </div>
+                    <div class="uk-pdl-body-large">
+
+                        @*<div class="uk-info-line uk-flex ">
+                            <div class="uk-text-bold">User ID:</div>
+                            <div class="uk-p-info">@Model.UserId</div>
+                        </div>*@
+
+                        <div class="uk-info-line uk-flex ">
+                            <div class="uk-text-bold">Full Name:</div>
+                            <div class="uk-p-info">@RTech.Demo.Common.StudentSession.LoggedStudent.StudentName</div>
+                        </div>
+
+                        <div class="uk-info-line uk-flex ">
+                            <div class="uk-text-bold">Gender:</div>
+                            <div class="uk-p-info">@Model.Gender</div>
+                        </div>
+
+                        <div class="uk-info-line uk-flex ">
+                            <div class="uk-text-bold">Occupation</div>
+                            <div class="uk-p-info">@Model.Occupation </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--  -->
+            <!--  -->
+            <div>
+                <div class="uk-pdl-form ">
+                    <div class="uk-pdl-header-large  ">
+                        Contact Information
+
+                    </div>
+                    <div class="uk-pdl-body-large">
+
+                        <div class="uk-info-line uk-flex ">
+                            <div class="uk-text-bold">Email:</div>
+                            <div class="uk-p-info">@Model.Email</div>
+                        </div>
+
+                        <div class="uk-info-line uk-flex ">
+                            <div class="uk-text-bold">Contact Number:</div>
+                            <div class="uk-p-info">@Model.Phone</div>
+                        </div>
+
+                        <div class="uk-info-line uk-flex ">
+                            <div class="uk-text-bold">Country of Birth</div>
+                            <div class="uk-p-info">@Model.Country </div>
+                        </div>
+
+                        <div class="uk-info-line uk-flex ">
+                            <div class="uk-text-bold">Address:</div>
+                            <div class="uk-p-info">@Model.Address </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--  -->
+
+        </div>
+
+        <a href="@Url.Action("Reports","Dashboard", new { @Area = "Student"})" class="uk-button  uk-margin uk-button-danger uk-border-pill uk-animation-fade"><span uk-icon="chevron-left"></span>Back</a>
+    </div>
+
+</section>

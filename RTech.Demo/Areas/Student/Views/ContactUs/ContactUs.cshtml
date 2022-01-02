@@ -1,0 +1,115 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.ContactUsViewModel
+@{
+    ViewBag.Title = "ContactUs";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+
+<section class="uk-section-small uk-bg-dark-blue uk-light  uk-text-center uk-arrow-down uk-relative  ">
+
+    <div class="uk-container  ">
+        <h2 class="uk-margin-remove uk-text-bold">Contact Us</h2>
+        <ul class="uk-breadcrumb uk-flex uk-flex-center">
+            <li><a href="https://pronaati.com.au/">Home</a></li>
+            <li><span>Contact Us</span></li>
+        </ul>
+    </div>
+
+</section>
+<!--  -->
+
+<section class="uk-section uk-bg-mudred">
+    <div class=" uk-container  ">
+        <div class="uk-margin-large-bottom">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3148.009853457264!2d147.32590221532143!3d-37.90683237973558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b2f6975ed277337%3A0x8d748b7fee461a88!2s2552%20Princes%20Hwy%2C%20Fernbank%20VIC%203864%2C%20Australia!5e0!3m2!1sen!2snp!4v1566702170565!5m2!1sen!2snp" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+        <div class="uk-text-left " uk-height-match="target: > div > .uk-card" uk-grid>
+
+            <div class="uk-width-expand@m">
+                <div class="uk-card uk-card-default     uk-margin-bottom clearfix ">
+                    <div class="uk-card-body map">
+                        @using (Html.BeginForm("ContactUs", "ContactUs", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+
+                            <div class="uk-grid-small" uk-grid>
+
+                                <div class="uk-width-1-2@s">
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "uk-input", @placeholder = "Full Name*" })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "uk-input", @placeholder = "Email Address*" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "uk-input", @placeholder = "Phone No." })
+                                </div>
+                                <div class="uk-width-1-2@s">
+                                    @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.countries, "Country", new { @class = "uk-select" })
+                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="uk-width-1-1">
+                                    @Html.TextAreaFor(x => x.Message, new { @class = "uk-textarea", @placeholder = "Message" })
+                                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="uk-width-1-1 uk-margin-bottom uk-text-right">
+                                    <button type="submit" class="uk-button uk-button-primary">Send <span class=" uk-icon " uk-icon="arrow-right"></span></button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="uk-width-1-3@m">
+                <div class="uk-card uk-card-default     uk-margin-medium-bottom uk-padding-small clearfix">
+                    <div class="uk-card-body ">
+                        <h4>Pro Naati Pty Ltd</h4>
+
+                        <address>
+                            <!--  -->
+                            <div class="uk-flex uk-flex-middle uk-margin-bottom">
+                                <div>
+                                    <img src="~/images/icon/location.svg" width="50">
+                                </div>
+                                <div class="uk-margin-left">
+                                    Level 1/ 556 Princes Highway Rockdale, New South Wales 2216, Australia
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="uk-flex uk-flex-middle uk-margin-bottom">
+                                <div>
+                                    <img src="~/images/icon/email.svg" width="30">
+                                </div>
+                                <div class="uk-margin-left">
+                                    info@pronaati.com.au
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="uk-flex uk-flex-middle uk-margin-bottom">
+                                <div>
+                                    <img src="~/Images/icon/phone.svg" width="30">
+                                </div>
+                                <div class="uk-margin-left">
+                                    02 8542 3501 (Ext 2)
+                                </div>
+                            </div>
+                            <!--  -->
+                        </address>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+
+

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{44415C1C-0ACB-43FB-B1D6-388FA6B5BE15}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Riddhasoft.Setup.Services</RootNamespace>
+    <AssemblyName>Riddhasoft.Setup.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Course\SLanguageType.cs" />
+    <Compile Include="Course\SMockTestQuestion.cs" />
+    <Compile Include="Course\SOnlineClassRoomCourse.cs" />
+    <Compile Include="Course\SOnlineClassRoomCourseDetails.cs" />
+    <Compile Include="Course\SOnlineClassRoomCoursePracticeDetails.cs" />
+    <Compile Include="Course\SOnlineTraining.cs" />
+    <Compile Include="Course\SOnllineTrainingDetails.cs" />
+    <Compile Include="Course\SSegment.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Package\SNaatiPackage.cs" />
+    <Compile Include="Package\SPackage.cs" />
+    <Compile Include="Package\SPackageDetails.cs" />
+    <Compile Include="Practice\SBoosterCollocation.cs" />
+    <Compile Include="Practice\SMasterTopicSentenceBooster.cs" />
+    <Compile Include="Practice\SSynonymBooster.cs" />
+    <Compile Include="Practice\SVocabularyAndPronunciationBooster.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionPackage\SNaatiMockTest.cs" />
+    <Compile Include="QuestionPackage\SQuestionPackageDetail.cs" />
+    <Compile Include="QuestionPackage\SQuestionPackageMaster.cs" />
+    <Compile Include="QuestionSet\SQuestionSetDetail.cs" />
+    <Compile Include="QuestionSet\SQuestionSetMaster.cs" />
+    <Compile Include="SCompany.cs" />
+    <Compile Include="SDateTable.cs" />
+    <Compile Include="SFiles.cs" />
+    <Compile Include="SFolder.cs" />
+    <Compile Include="SMockTestReport.cs" />
+    <Compile Include="SNaatiScore.cs" />
+    <Compile Include="SPackagePaymentDetails.cs" />
+    <Compile Include="STransactionHistory.cs" />
+    <Compile Include="STutorial.cs" />
+    <Compile Include="STutorialDetails.cs" />
+    <Compile Include="ViewModel\MockTestReportKendoVm.cs" />
+    <Compile Include="ViewModel\QuestionSetDetailsViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Riddhasoft.MockTest.Entity\Riddhasoft.MockTest.Entity.csproj">
+      <Project>{F3C08E38-4A3E-46A9-8AE2-3C6751BA8B49}</Project>
+      <Name>Riddhasoft.MockTest.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Riddhasoft.Services.Common\Riddhasoft.Services.Common.csproj">
+      <Project>{302eb62d-eb13-453e-a267-3ed06677e4b7}</Project>
+      <Name>Riddhasoft.Services.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Riddhasoft.Setup.Entity\Riddhasoft.Setup.Entity.csproj">
+      <Project>{f75144c9-74a4-4d12-b17d-908aae1e208e}</Project>
+      <Name>Riddhasoft.Setup.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Riddhasoft.Student.Entity\Riddhasoft.Student.Entity.csproj">
+      <Project>{EED99B5B-6C4E-43A3-825A-202474683F14}</Project>
+      <Name>Riddhasoft.Student.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RTech.Core.Repository\Riddhasoft.Core.Repository.csproj">
+      <Project>{9604fec8-726a-4731-afd2-0ee7a7dd5aea}</Project>
+      <Name>Riddhasoft.Core.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Riddhasoft.Setup.Services.dll" />
+    <Content Include="bin\Debug\Riddhasoft.Setup.Services.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

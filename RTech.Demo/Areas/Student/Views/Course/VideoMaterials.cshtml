@@ -1,0 +1,77 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.IncludedVideosViewModel
+@{
+    ViewBag.Title = "VideoMaterials";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<!--  -->
+<section class="uk-section-small uk-bg-dark-blue uk-light  uk-text-center uk-arrow-down uk-relative  ">
+
+    <div class="uk-container  ">
+        <h2 class="uk-margin-remove uk-text-bold">@Model.PackageName</h2>
+        <ul class="uk-breadcrumb uk-flex uk-flex-center">
+            <li><a href="@Url.Action("Home","TopBar", new { @Area = "Student"})">Home</a></li>
+            <li><span>NAATI CCL EXPRESS COURSE </span></li>
+        </ul>
+    </div>
+
+</section>
+<!--  -->
+<!--  -->
+
+<section class="uk-section">
+
+    <div class="uk-container ">
+        <div class="uk-text-left" uk-grid>
+            <div class="uk-width-1-4@m uk-first-column">
+                <div class="uk-card uk-card-default uk-card-body uk-sticky" style="z-index: 88;" uk-sticky="bottom: #footer">
+                    <ul class="uk-nav-default uk-nav-parent-icon uk-nav" uk-nav="">
+                        <li class="uk-active"><a href="package-details.php">Package Overview</a></li>
+                        <li class="uk-parent uk-open">
+                            <a href="#">Course Material</a>
+                            <ul class="uk-nav-sub" aria-hidden="false">
+                                <li><a href="@Url.Action("VideoMaterials","Course", new { @Area = "Student",@packageId = Model.PackageId })">Video</a></li>
+                                <li><a href="@Url.Action("PdfMaterial","Course", new { @Area = "Student",@packageId = Model.PackageId })">PDF</a></li>
+                               @* <li><a href="@Url.Action("AudioMaterial","Course", new { @Area = "Student",@packageId = Model.PackageId })">Audio</a></li>*@
+                            </ul>
+                        </li>
+                        <li><a href="@Url.Action("IncludedMockTests","Course", new { @Area="Student",  @packageId = Model.PackageId, @testType = Riddhasoft.Setup.Entity.Package.PackageTestType.RealTest})">Mock Test - Scored by Naati Assessors</a></li>
+                        <li><a href="@Url.Action("IncludedMockTests","Course", new { @Area="Student",  @packageId = Model.PackageId ,@testType = Riddhasoft.Setup.Entity.Package.PackageTestType.PracticeTest})">Practice Mock Test - Unscored with Answers</a></li>
+
+                    </ul>
+                </div><div class="uk-sticky-placeholder" style="height: 226px; margin: 0px;" hidden=""></div>
+
+            </div>
+            <div class="uk-width-expand@m">
+                <div class="uk-db-header  uk-card-default ">
+                    <h3>Video</h3>
+                </div>
+                <div class="uk-card uk-card-default uk-card-body">
+
+                    <div class="uk-child-width-1-2@s uk-grid-match" uk-grid>
+                        <!--  -->
+                        @{
+                            foreach (var item in Model.Videos)
+                            {
+                                <div>
+                                    <div class="uk-border-1">
+                                        <video width="100%" controls>
+                                            <source src="@item.link" type="video/mp4">
+                                            <source src="@item.link" type="video/ogg">  Your browser does not support HTML5 video.
+                                        </video>
+                                        <h4 class="uk-margin-remove uk-padding-small">@item.Title </h4>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                        <!--  -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--  -->

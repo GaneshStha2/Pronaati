@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "OptionalBreak";
+    Layout = "~/Areas/MockTest/Views/Shared/_Layout_MockTest.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+<!--  -->
+<main>
+    <!-- /test header -->
+
+    <div class="uk-stripe uk-padding-small  ">
+
+    </div>
+    <!-- /test header -->
+    <!-- /test body -->
+    <div class="uk-container">
+        <!--  -->
+        <div class=" uk-margin-top uk-margin-bottom  ">
+
+        </div>
+        <!--  -->
+        <!-- main-body -->
+        <div class="uk-card uk-card-default uk-card-body uk-margin-small-top uk-margin-medium-bottom">
+            <h3>Optional Break</h3>
+
+            <p>You may now take a break of up to 10 minutes. If you want to take a break you must leave the testing room. You should allow up to 5 minutes to sign back in and be seated. If you spend more than 10 minutes in total on the break, that time is taken from the next part.</p>
+            <ul>
+                <li>If you want to take a break raise your hand to get the attention of the Test Administrator</li>
+                <li>If you do not want to take a break click on the Next (N) button below to continue the test</li>
+            </ul>
+
+            <img src="images/timer.jpg" alt="">
+        </div>
+
+        <!--  -->
+        <div class="uk-subtitle-header-footer uk-margin-top uk-margin-large-bottom">
+            <div class="uk-float-left">
+                Click on the Next (N) button to continue
+            </div>
+
+            <div class="uk-clearfix"></div>
+        </div>
+        <!--  -->
+    </div>
+    <!-- /test body -->
+
+</main>
+<!--  -->
+<!--  -->
+<footer class="uk-next-previous-footer uk-padding  ">
+    <div class="uk-container ">
+        <div class="uk-grid-medium uk-child-width-expand@s uk-text-center" uk-grid>
+            <div>
+                <button type="submit" title="" class="uk-button uk-button-primary uk-border-pill uk-float-right">Next <span uk-icon="chevron-right"></span></button>
+                @*<a href="@Url.Action("StartListening1","MockTestListening")" title="" class="uk-button uk-button-danger uk-border-pill"><span uk-icon="ban"></span>  End Exam</a>*@
+            </div>
+        </div>
+    </div>
+</footer>
+<!--  -->
+}

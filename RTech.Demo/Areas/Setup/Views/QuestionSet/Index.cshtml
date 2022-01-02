@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout_Adminlte.cshtml";
+}
+
+<style>
+
+    .WrodWrapper {
+        max-width: 200px;
+        word-break: break-word;
+        white-space: normal;
+    }
+
+    .bg-blue {
+        background-color: #a2bce5 !important;
+    }
+
+    #modal-body-id {
+        height: auto !important;
+        overflow-y: auto !important;
+    }
+
+    #myTabContent {
+        height: auto !important;
+        overflow-y: auto !important;
+    }
+
+    /*.modal-lg {
+        width: 80%;
+    }*/
+
+    .spe-setup {
+        /* background: #eee; */
+        /* border: solid 1px #eee; */
+        margin: 20px 0;
+    }
+
+        .spe-setup h3 {
+            color: #3f51b5;
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 8px 15px;
+            border: solid 1px #eee;
+            border-bottom: 0;
+        }
+
+            .spe-setup h3 span {
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                line-height: 30px;
+                background: #3f51b5;
+                border-radius: 50%;
+                text-align: center;
+                color: #fff;
+                margin-right: 10px;
+            }
+
+    div#myTabContent {
+        border: solid 1px #eee;
+        border-top: 0;
+    }
+
+    .question-set {
+        background: #eee;
+        padding: 10px 0;
+        margin-bottom: 15px;
+    }
+
+    .setup-tab-font-size {
+        font-size: 19px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .dropdown-center {
+        width: 450px !important;
+    }
+
+ 
+
+    select {
+        width: 200px;
+        word-wrap : break-word;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        @T("Dialogue")
+        <sup class="text-green">@T("Creation")</sup>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> @T("Home")</a></li>
+        <li class="active">@T("Setup")</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="modal" id="QuestionSetCreationModel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <header><h4 class="text-success">@T("Dialogue")</h4></header>
+                </div>
+
+                <div class="modal-body" id="modal-body-id">
+
+
+
+
+                    <div data-bind="with:QuestionSet">
+
+                        <div class="question-set">
+
+                            <div class=" clearfix form-group">
+                                <div class="">
+                                    <label class="col-lg-3 required" for="Number">@T("Dialogue Name")</label>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control" data-bind="value:QuestionSetName" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix  form-group">
+                                <label class="col-lg-3  required" for="Number">@T("Dialogue  Code") </label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" data-bind="value:QuestionSetCode,event:{change : $root.CheckUniqueCode} ,enable:$root.ModeOfButton()== 'Create'" />
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group col-lg-7">
+                            <input type="button" data-bind="click:CreateUpdate,createUpdateText:ModeOfButton" name="Save" class="btn btn-success" value=@T("Save") />
+                            <input type="button" data-bind="click:Reset" name="Reset" value=@T("Reset") class="btn btn-default" />
+                            <input type="button" id="close" data-bind="click:CloseModal" value=@T("Back") class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- User Modal -->
+    <!-- Info boxes -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-success">
+
+                <div class="box-header">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default " data-bind="click:ShowModal,actionVisibility:'11'"><i class="fa fa-plus-square text-green">&nbsp;@T("Create")</i></button>
+                        <button type="button" class="btn btn-default " data-bind="click:Select,actionVisibility:'12'"><i class="fa fa-pencil text-blue">&nbsp;@T("Edit")</i></button>
+                        <button type="button" class="btn btn-default " data-bind="click:Delete,actionVisibility:'13'"><i class="fa fa-trash text-red">&nbsp;@T("Delete")</i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-12" data-bind="kendoGrid:KendoGridOptions">
+                            <div id="questionSetKendoGrid">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="mode-button-template">
+        <span class="glyphicon glyphicon-plus" data-bind="text:$root.ModeOfButton"></span>
+    </script>
+    <!-- /.row -->
+    <!-- /.row -->
+    <!-- Main row -->
+    <!-- /.row -->
+</section>
+
+@if (Request.IsAjaxRequest())
+{
+    @*<script src="~/Scripts/bootstrap-strength-meter.js"></script>*@
+    <script src="~/Scripts/bootstrap-strength-meter.js"></script>
+    @*<script src="~/Areas/User/Scripts/Riddha.Script.User.Model.js"></script>
+        <script src="~/Areas/User/Scripts/Riddha.Script.User.Controller.js"></script>*@
+    <script src="~/Areas/User/Scripts/Riddha.Script.User.Model.js"></script>
+    <script src="~/Areas/User/Scripts/Riddha.Script.User.Controller.js"></script>
+    <script type="text/javascript">
+        Riddha.global.permission.action('3').done(function (data) {
+            Riddha.global.permission.actions = data.Data;
+            ko.cleanNode(document.getElementById("partial-render"));
+            var obj = new questionSetController();
+            ko.applyBindings(obj, document.getElementById("partial-render"));
+        });
+    </script>
+}
+else
+{
+    @section scripts
+    {
+        <script type="text/javascript">
+            Riddha.global.permission.action('3').done(function (data) {
+                Riddha.global.permission.actions = data.Data;
+                ko.cleanNode(document.getElementById("partial-render"));
+                var obj = new questionSetController();
+                ko.applyBindings(obj, document.getElementById("partial-render"));
+            });
+        </script>
+    }
+}

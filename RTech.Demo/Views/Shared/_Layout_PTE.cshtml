@@ -1,0 +1,275 @@
+﻿@{
+    var currentStudent = RTech.Demo.Common.StudentSession.LoggedStudent;
+
+}
+
+<style>
+    .text-danger{
+        color : red ;
+    }
+    .text-success {
+        color: green;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Pro Naati</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/uikit.min.css" />
+    <link rel="stylesheet" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/dataTables.uikit.min.css" />
+    <link rel="stylesheet" href="/css/uk-design.css" />
+    <script src="/js/jquery-3.3.1.js"></script>
+    <script src="/js/uikit.min.js"></script>
+    <script src="/js/uikit-icons.min.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.uikit.min.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //    $('.uk-table-searchable').DataTable();
+        //});
+    </script>
+    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d61664c0887cc001233142c&product=inline-share-buttons' async='async'></script>
+</head>
+<body>
+
+    <div class="boxed-design">
+        @if (RTech.Demo.Common.StudentSession.LoggedStudent != null)
+        {
+            <div class="uk-position-relative ">
+                <div class="uk-container ">
+                    <nav class="uk-navbar-container uk-navbar-transparent uk-navbar" uk-navbar="dropbar: false;">
+                        <div class="uk-navbar-left">
+                            
+                            <a class="uk-navbar-item uk-logo" href="@Url.Action("Index","Dashboard", new { Area="Student"})"><img src="/images/logo.png" alt="logo"></a>
+                        </div>
+                        <div class="uk-navbar-right ">
+                            <ul class="uk-navbar-nav uk-visible@m">
+                                <li> <a href="https://pronaati.com.au/"> Home </a> </li>
+                                <li> <a href="https://pronaati.com.au/about-us.html"> About Us </a> </li>
+                                <li> <a href="https://pronaati.com.au/naati-languages.html"> Naati Languages</a> </li>
+                                <li> <a href="https://pronaati.com.au/testimonials.html"> Testimonials </a> </li>
+                                <li> <a href="https://pronaati.com.au/blog.html"> Blog </a> </li>
+                                <li> <a href="https://pronaati.com.au/contact-us.html"> Contact Us </a> </li>
+                            </ul>
+
+                            <!--  -->
+                            <div class="uk-login-img-wrapper uk-flex uk-flex-middle uk-text-bold uk-margin-large-left uk-margin-right" aria-expanded="false">
+                                <div class="uk-user-image    uk-visible@s">
+                                    <img src="@currentStudent.StudentImageUrl" alt="Bijaya Chhetri">
+                                </div>
+
+                                @currentStudent.StudentName
+                                <span class="uk-icon" uk-icon="chevron-down"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="chevron-down"><polyline fill="none" stroke="#000" stroke-width="1.03" points="16 7 10 13 4 7"></polyline></svg></span>
+
+
+                            </div>
+                            <div uk-dropdown="" class="uk-dropdown">
+                                <ul class="uk-nav uk-dropdown-nav uk-text-left">
+                                    <li><a href="@Url.Action("Index","Dashboard", new { Area="Student"})">Dashboard</a></li>
+                                    <li><a href="@Url.Action("LogOut","Dashboard", new { Area="Student"})">Logout</a></li>
+                                </ul>
+                            </div>
+                            <!--  -->
+                            <a uk-navbar-toggle-icon="" uk-toggle="target: #offcanvas-push" class="uk-icon uk-navbar-toggle-icon uk-hidden@m"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="navbar-toggle-icon"><rect y="9" width="20" height="2"></rect><rect y="3" width="20" height="2"></rect><rect y="15" width="20" height="2"></rect></svg></a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="uk-position-relative ">
+                <div class="uk-container ">
+
+                    <nav class="uk-navbar-container uk-navbar-transparent uk-navbar" uk-navbar="dropbar: false;">
+                        <div class="uk-navbar-left">
+                            <a class="uk-navbar-item uk-logo" href="@Url.Action("Index","Dashboard", new { Area="Student"})"><img src="/images/logo.png" alt="logo"></a>
+                        </div>
+                        <div class="uk-navbar-right ">
+                            <ul class="uk-navbar-nav uk-visible@m">
+                                <li> <a href="https://pronaati.com.au/"> Home </a> </li>
+                                <li> <a href="https://pronaati.com.au/about-us.html"> About Us </a> </li>
+                                <li> <a href="https://pronaati.com.au/naati-languages.html"> Naati Languages</a> </li>
+                                <li> <a href="https://pronaati.com.au/blog.html"> Testimonials </a> </li>
+                                <li> <a href="https://pronaati.com.au/blog.html"> Blog </a> </li>
+                                <li> <a href="https://pronaati.com.au/contact-us.html"> Contact Us </a> </li>
+                            </ul>
+                            <a href="@Url.Action("Index","LogIn", new { @Action = "Student"})" class="uk-button uk-button-primary uk-button-small uk-margin-left uk-margin-right"> Login </a>
+                            <a uk-navbar-toggle-icon="" uk-toggle="target: #offcanvas-push" class="uk-margin-right uk-icon uk-navbar-toggle-icon uk-hidden@m"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="navbar-toggle-icon"><rect y="9" width="20" height="2"></rect><rect y="3" width="20" height="2"></rect><rect y="15" width="20" height="2"></rect></svg></a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        }
+
+
+        <!-- top-bar -->
+        <!-- /.top-bar -->
+        <!-- header-section-->
+        <!-- /. header-section-->
+        <!-- footer -->
+        @RenderBody()
+
+
+
+        <footer class="uk-background-primary uk-padding uk-light" id="footer">
+            <div class="uk-container ">
+
+                <div class="uk-child-width-expand@s " uk-grid>
+                    <div>
+
+                        <h4 class="uk-margin-remove">Pro Naati Pty Ltd</h4>
+                        <address>
+                            <!--  -->
+                            <div class="uk-flex uk-flex-middle uk-margin-small-bottom">
+                                <div>
+                                    <img src="/images/icon/location-white.svg" width="50">
+                                </div>
+                                <div class="uk-margin-left">
+                                    Level 1/556 Princes Highway Rockdale, New South Wales 2216, Australia
+                                </div>
+                            </div>
+                            <!--  -->
+
+                        </address>
+
+                    </div>
+                    <div>
+                        <address>
+
+                            <!--  -->
+                            <div class="uk-flex uk-flex-middle uk-margin-small-bottom">
+                                <div>
+                                    <img src="/images/icon/email-white.svg" width="30">
+                                </div>
+                                <div class="uk-margin-left">
+                                    info@pronaati.com.au
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="uk-flex uk-flex-middle uk-margin-small-bottom">
+                                <div>
+                                    <img src="/images/icon/phone-white.svg" width="30">
+                                </div>
+                                <div class="uk-margin-left">
+                                    02 8542 3501 (Ext 2)
+                                </div>
+                            </div>
+                            <!--  -->
+                        </address>
+                    </div>
+                    <div>
+                        <a href="https://pronaati.com.au/contact-us.html", class="uk-button uk-button-default uk-align-right">Contact Us</a>
+                    </div>
+                </div>
+                <hr>
+
+                <div class=" " uk-grid>
+                    <div class="uk-width-auto@m">
+                        <!--  -->
+                        <div>
+                            <a href="" class="uk-margin-right"><i class="fa fa-facebook fa-lg"></i></a>
+                            <a href="" class="uk-margin-right"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a href="" class="uk-margin-right"><i class="fa fa-youtube fa-lg"></i></a>
+                            <a href="" class="uk-margin-right"><i class="fa fa-instagram fa-lg"></i></a>
+                        </div>
+                        <!--  -->
+                    </div>
+
+                    <div class="uk-width-expand@m">
+                        <!--  -->
+                        <div>
+                            <ul class="uk-list-inline">
+                                <li><a href="">Terms & Conditions</a></li>
+                                <li><a href=""> Privacy Statement </a></li>
+                                <li><a href="">Refund Policy</a></li>
+                            </ul>
+                        </div>
+                        <!--  -->
+                    </div>
+
+                    <div class="uk-width-auto@m">
+
+                        <!--  -->
+                        <div>
+                            <p>
+                                &copy; Pro Naati Pty Ltd All Rights Reserved.
+                                <br><a href="">Cyberlink</a>
+                            </p>
+                        </div>
+                        <!--  -->
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+
+
+
+        <div style="clear: both;">
+
+        </div>
+
+        <div id="uk-select-packages" class="uk-flex-top" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical uk-text-center">
+                <h3>Choose your test type</h3>
+
+                <button class="uk-modal-close-default uk-icon uk-close" type="button" uk-close=""><svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" data-svg="close-icon"><line fill="none" stroke="#000" stroke-width="1.1" x1="1" y1="1" x2="13" y2="13"></line><line fill="none" stroke="#000" stroke-width="1.1" x1="13" y1="1" x2="1" y2="13"></line></svg></button>
+                <!--  -->
+                <div class="uk-language">
+                    <div class="uk-grid-divider uk-child-width-1-2@s uk-text-center uk-flex uk-flex-middle uk-grid" uk-grid="">
+                        <div class="uk-first-column">
+                            <a href="@Url.Action("AllMockTests","TopBar", new { @Area="Student"})">
+                                <img src="/images/icon/mocktest.svg" width="80">
+                                <h4 class="uk-margin-remove">Mock Test</h4>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("AllPAckages","TopBar", new { @Area= "Student"})">
+                                <img src="/images/icon/packages.svg" width="80">
+                                <h4 class="uk-margin-remove">Packages</h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+    <script src="~/js/jquery.min.js" type="text/javascript"></script>
+    <script src="~/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/js/menumaker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="~/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/js/multiple-carousel.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+
+    <script type="text/javascript" src="~/js/jquery.menu-aim.js"></script>
+    <script type="text/javascript" src="~/js/menu.js"></script>
+
+    <script type="text/javascript" src="~/js/player.js"></script>
+    <script type="text/javascript" src="~/js/readmore.js"></script>
+
+    <script src="~/Scripts/toastr.js"></script>
+    <script src="~/Scripts/knockout-3.4.2.js"></script>
+    <script src="~/Scripts/App/Globals/Riddha.Globals.ko.js"></script>
+
+
+
+
+
+</body>
+</html>
+
+

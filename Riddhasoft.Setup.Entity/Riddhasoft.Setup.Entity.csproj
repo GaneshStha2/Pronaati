@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F75144C9-74A4-4D12-B17D-908AAE1E208E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Riddhasoft.Setup.Entity</RootNamespace>
+    <AssemblyName>Riddhasoft.Setup.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RTech.Demo\bin\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Course\ELanguageType.cs" />
+    <Compile Include="Course\EOnlineClassRoomCourse.cs" />
+    <Compile Include="Course\EOnlineClassRoomCourseDetails.cs" />
+    <Compile Include="Course\EOnlineClassRoomCoursePracticeDetails.cs" />
+    <Compile Include="Course\EOnlineTraining.cs" />
+    <Compile Include="Course\EOnlineTrainingDetails.cs" />
+    <Compile Include="Course\ESegment.cs" />
+    <Compile Include="EBranch.cs" />
+    <Compile Include="ECompany.cs" />
+    <Compile Include="ECountry.cs" />
+    <Compile Include="EDateTable.cs" />
+    <Compile Include="EFiles.cs" />
+    <Compile Include="EFolder.cs" />
+    <Compile Include="Course\EMockTestQuestionMaster.cs" />
+    <Compile Include="ENaatiScore.cs" />
+    <Compile Include="EPackagePaymentDetails.cs" />
+    <Compile Include="ETutorials.cs" />
+    <Compile Include="Listening\EListeningTypeEight.cs" />
+    <Compile Include="Listening\EListeningTypeFive.cs" />
+    <Compile Include="Listening\EListeningTypeFour.cs" />
+    <Compile Include="Listening\EListeningTypeOne.cs" />
+    <Compile Include="Listening\EListeningTypeSeven.cs" />
+    <Compile Include="Listening\EListeningTypeSix.cs" />
+    <Compile Include="Listening\EListeningTypeThree.cs" />
+    <Compile Include="Listening\EListeningTypeTwo.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Package\ENaatiPackage.cs" />
+    <Compile Include="Package\EPackage.cs" />
+    <Compile Include="Package\EPackageDetails.cs" />
+    <Compile Include="Practice\EBoosterCollocation.cs" />
+    <Compile Include="Practice\EMasterTopicSentenceBooster.cs" />
+    <Compile Include="Practice\ESynonymBooster.cs" />
+    <Compile Include="Practice\EVocabularyAndPronunciationBooster.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionPackage\ENaatiMockTest.cs" />
+    <Compile Include="QuestionPackage\EQuestionPackageDetail.cs" />
+    <Compile Include="QuestionPackage\EQuestionPackageMaster.cs" />
+    <Compile Include="QuestionSet\EQuestionSetDetail.cs" />
+    <Compile Include="QuestionSet\EQuestionSetMaster.cs" />
+    <Compile Include="Reading\EReadingTypeFive.cs" />
+    <Compile Include="Reading\EReadingTypeFiveOptions.cs" />
+    <Compile Include="Reading\EReadingTypeFour.cs" />
+    <Compile Include="Reading\EReadingTypeOne.cs" />
+    <Compile Include="Reading\EReadingTypeThree.cs" />
+    <Compile Include="Reading\EReadingTypeTwo.cs" />
+    <Compile Include="Speaking\ESpeakingTypeFive.cs" />
+    <Compile Include="Speaking\ESpeakingTypeFour.cs" />
+    <Compile Include="Speaking\ESpeakingTypeOne.cs" />
+    <Compile Include="Speaking\ESpeakingTypeSeven.cs" />
+    <Compile Include="Speaking\ESpeakingTypeSix.cs" />
+    <Compile Include="Speaking\ESpeakingTypeThree.cs" />
+    <Compile Include="Speaking\ESpeakingTypeTwo.cs" />
+    <Compile Include="Writing\EWritingTypeOne.cs" />
+    <Compile Include="Writing\EWritingTypeTwo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Riddhasoft.Setup.Entity.dll" />
+    <Content Include="bin\Debug\Riddhasoft.Setup.Entity.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Riddhasoft.Student.Entity\Riddhasoft.Student.Entity.csproj">
+      <Project>{EED99B5B-6C4E-43A3-825A-202474683F14}</Project>
+      <Name>Riddhasoft.Student.Entity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

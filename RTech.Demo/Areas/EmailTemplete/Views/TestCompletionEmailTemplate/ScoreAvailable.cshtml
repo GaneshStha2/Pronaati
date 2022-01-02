@@ -1,0 +1,60 @@
+﻿
+@{
+    string baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Pro Naati</title>
+</head>
+<body style="padding:40px;">
+    <div>
+        <div>
+            <header>
+                <div style="float:left;">
+                    <img src="@baseUrl/Areas/Student/Images/logo.png" />
+                </div>
+                <br />
+            </header>
+        </div>
+        <div>
+
+
+            <br />
+            <b> Dear Student,</b>
+
+            <p>Your score report for PRO NAATI Mock Test is now available.</p>
+
+            <p>Please follow these steps to access your score report.</p>
+
+            <p>
+                1) Point your Web browser to www.pronaati.com.au
+
+                <br />
+                2) Login to your account.
+                <br />
+                3) Click on "Report" to view your score and feedbacks.
+
+            </p>
+
+            <p>
+                <p>**PLEASE DO NOT REPLY TO THIS E-MAIL**</p>
+                <br />
+                If you need to contact us, please visit our Web site at http://www.pearsonvue.com/pte.
+            </p>
+
+            <p>
+                <b>Best Regards</b>
+                <br />
+                <b>Pro Naati Team</b>
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>
+
+

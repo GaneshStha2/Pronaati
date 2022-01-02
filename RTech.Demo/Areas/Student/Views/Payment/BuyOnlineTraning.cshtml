@@ -1,0 +1,221 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.OnlineTrainingMasterViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+
+
+<!--  Start -->
+<div class="dashboard clearfix">
+    <div class="pv20">
+
+
+        <div class="container  ">
+
+
+            <div class="col-lg-12">
+                <div class="dashboardinner shadow_dashboard">
+                    <h3>Payment</h3>
+                    <div class="pv20">
+                        <!--  -->
+                        <div class="col-lg-6">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+
+                                            <td><a href="@Url.Action("OnlineTrainingDetails" , "Course" , new { id = Model.OnlineTrainigId})">@Model.Title</a></td>
+                                            <td>@Model.Price</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td align="right">Sub Total :</td>
+                                            <td> @Model.Price</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="right">Total :</td>
+                                            <td>  @Model.Price</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                        <!--  -->
+
+                        <div class="col-lg-6">
+                            <div class="st-accordion">
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                            <h5 class="panel-title">
+                                                <label for="newpayment" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    <input type="radio" name="" id="newpayment"> New Payment Card
+                                                </label>
+                                                <span class="card-array ml-space-xs">
+                                                    <img src="~/Images/payimg1.svg" alt="VISA" width="50" class="sc-card-box__image">
+                                                    <img src="~/Images/payimg2.svg" alt="MasterCard" width="50" class="sc-card-box__image">
+                                                    <img src="~/Images/payimg3.svg" alt="AMEX" width="50" class="sc-card-box__image">
+                                                    <img src="~/Areas/Student/Images/card-discover.svg" alt="DISCOVER" width="50" class="sc-card-box__image">
+                                                </span>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div class="panel-body">
+                                                <div>
+                                                    <form action="payment_submit" method="get" accept-charset="utf-8">
+                                                        <div class="row">
+                                                            <!--  -->
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+
+                                                                    <div class="input-group">
+
+                                                                        <input type="text" class="form-control bg-white" placeholder="Card Number">
+                                                                        <div class="input-group-addon"><i class="fa fa-credit-card"></i></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <select name="" class="form-control bg-white" style="width: 100%;">
+                                                                        <option value="">MM</option>
+                                                                        <option>01</option>
+
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <select name="" class="form-control bg-white" style="width: 100%;">
+                                                                        <option value="">YYY</option>
+                                                                        <option>01</option>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-4">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control bg-white" placeholder="Security Code">
+                                                                </div>
+                                                            </div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+
+
+                                                                    <input type="text" class="form-control bg-white" placeholder="Name on Card">
+
+                                                                </div>
+                                                            </div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <select class="form-control bg-white">
+                                                                        <option>Select Country</option>
+                                                                    </select>
+
+                                                                </div>
+                                                            </div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control bg-white" placeholder="Zip Code">
+
+                                                                </div>
+                                                            </div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-12">
+                                                                <label>
+                                                                    <input type="checkbox">
+                                                                    Remember This Card
+                                                                </label>
+
+                                                            </div>
+                                                            <!--  -->
+                                                            <!-- //////////////// -->
+
+                                                            <div class="col-lg-6">
+                                                                <br>
+                                                                <div class="form-group">
+                                                                    <button type="submit" class="btn btn-danger">Complete Payment</button>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                            <h5 class="panel-title">
+                                                <label for="">
+                                                    <input type="radio" name="" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> <span class="card-array ml-space-xs">
+                                                        <img src="~/Areas/Student/Images/paypal.png" alt="PayPal">
+                                                    </span>
+                                                </label>
+
+
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                            <div class="panel-body">
+                                                <p>In order to complete your transaction, we will transfer you over to PayPal's secure servers.</p>
+
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-danger">Proceed</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</div>

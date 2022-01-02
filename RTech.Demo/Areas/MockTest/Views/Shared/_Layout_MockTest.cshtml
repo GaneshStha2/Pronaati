@@ -1,0 +1,317 @@
+﻿@{
+    /**/
+
+
+    TimeSpan RemainingTime = new TimeSpan(0, 12, 0); ;
+    int CurQuestionCount = RTech.Demo.Common.MockTestSession.CurrentQuestionCount;
+
+    string controllerName = HttpContext.Current.Request.RequestContext.RouteData.GetRequiredString("controller");
+    string actionName = HttpContext.Current.Request.RequestContext.RouteData.GetRequiredString("action");
+    string areaName = (HttpContext.Current.Request.RequestContext.RouteData.DataTokens["area"] ?? "").ToString();
+    //string SpeakingTime = RTech.Demo.Common.MockTestSession.SpeakingTime.ToString();
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PTE Test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="icon" type="image/gif" href="images/favicon.png">
+    <link href="~/Areas/MockTest/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/MockTest/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="~/Areas/MockTest/css/uikit.css" rel="stylesheet" />
+    <link href="~/Areas/MockTest/css/sortable.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- /main header -->
+    <header class="uk-padding uk-padding-remove-left  uk-padding-remove-right">
+        <div class="uk-container">
+            <div class="uk-child-width-1-2 uk-grid">
+                <div class="uk-logo">
+                    <a href="@Url.Action(" PTEIndex","Home", new { Area="" })" title="">
+                        <img src="~/Areas/MockTest/images/logo.png" />
+                    </a>
+                </div>
+                <div>
+                    <div class="uk-text-right  ">
+                        <div class="uk-margin-small-top">
+                            <button class="uk-button uk-button-primary  uk-border-pill" type="button">My Account <span class="uk-visible@s" uk-icon="chevron-down"></span></button>
+                            <div uk-dropdown>
+                                <ul class="uk-nav uk-dropdown-nav uk-text-left">
+                                    <li><a href="@Url.Action("Index","Dashboard", new { Area="Student" })">Dashboard</a></li>
+                                    <li><a href="@Url.Action("LogOut","Dashboard", new { Area="Student" })">Logout</a></li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        @if (areaName.ToLower() == "mocktest" && controllerName.ToLower() == "mocktesthome" && actionName.ToLower() == "index")
+        {
+
+        }
+        else
+        {
+
+            <div class="uk-test-title uk-bg-primary  ">
+                <div class="uk-container">
+                    <div class="uk-text-left" uk-grid>
+                        <div class="uk-width-expand@m">
+                            <h1 class="mt8">Pearson Test of English Academic – [@RTech.Demo.Common.StudentSession.LoggedStudent.StudentNameForMockTest]</h1>
+                        </div>
+
+
+                        <div class="uk-width-1-4@m uk-text-right">
+                            @if (CurQuestionCount > 0)
+                            {
+                                <h5><i uk-icon="clock"></i> Time Remaining : <b id="SectionTimer"></b>  <span><b id="questionCount"></b></span> </h5>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+        <fieldset id="bd">
+            @RenderBody()
+        </fieldset>
+
+
+
+
+
+
+    </main>
+
+
+
+
+    <script src="~/Areas/MockTest/js/uikit.min.js"></script>
+    <script src="~/Areas/MockTest/js/uikit-icons.min.js"></script>
+    <script src="~/Areas/MockTest/js/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        document.onkeydown = function (e) {
+
+            // keycode for F5 function
+            if (e.keyCode === 116) {
+                return false;
+            }
+            if (e.ctrlKey && e.keyCode === 82) {
+                return false;
+            }
+
+        };
+
+
+        var sec = '';
+        var min = '';
+        var hour = '';
+        debugger;
+        var sessionTime = '@TempData["Time"]';
+        //var sessionTime = '00:00:05'
+        var time = sessionTime.split(":");
+        var sec = time[2];
+        var min = time[1];
+        var hour = time[0];
+
+
+        if (sessionTime != "") {
+
+            var SectionTimer = function () {
+                debugger;
+
+                if ("@controllerName.ToLower()" == "mocktestlistening" && "@actionName.ToLower()" == "startlistening1") {
+                    if (document.getElementById("AudioCountDown").innerHTML == "Completed") {
+                        if (sec == 0 && min == 0 && hour == 0) {
+                            document.getElementById("SectionTimer").innerHTML = 'Finished';
+                            PopUp();
+                        }
+
+                        else {
+                            if (sec == 0 && min != 0) {
+                                sec = 60;
+                                --min;
+                            }
+                            if (--sec === 0 && min != 0) {
+                                sec = 60;
+                                if (--min === 0 && hour != 0) {
+                                    min = 60;
+                                    if (--hour === 0) hour = 24
+                                }
+
+                            }
+                            document.getElementById("SectionTimer").innerHTML = hour + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+                        }
+
+                    }
+                    else {
+                        document.getElementById("SectionTimer").innerHTML = hour + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+                    }
+                }
+
+                else {
+                    if (sec == 0 && min == 0 && hour == 0) {
+                        document.getElementById("SectionTimer").innerHTML = 'Finished';
+                        PopUp();
+                    }
+
+                    else {
+                        if (sec == 0 && min != 0) {
+                            sec = 60;
+                            --min;
+                        }
+                        if (--sec === 0 && min != 0) {
+                            sec = 60;
+                            if (--min === 0 && hour != 0) {
+                                min = 60;
+                                if (--hour === 0) hour = 24
+                            }
+
+                        }
+                        document.getElementById("SectionTimer").innerHTML = hour + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+                    }
+
+                }
+            };
+            setInterval(SectionTimer, 1000);
+            SectionTimer();
+        }
+        var CurrentQuestionCount = '@TempData["CurrentQuestionCount"]' || 0;
+        var TotalQuestionCount = '@TempData["TotalQuestionCount"]' || 0;
+        if (CurrentQuestionCount > 0) {
+            document.getElementById("questionCount").innerHTML = CurrentQuestionCount + " " + "of" + " " + TotalQuestionCount;
+        }
+        else {
+            document.getElementById("questionCount").innerHTML = "";
+        }
+
+
+        //For Popup
+        var popUpCountDown = 5;
+        function PopUp() {  // Custom Show button code.
+            debugger;
+            $("#subscriber_form").modal('show');
+
+            popUpCountDown--;
+            if (popUpCountDown <= 0) {
+                SkipSection();
+
+
+
+
+                @*if (@controllerName.ToLower() == "mocktestspeaking") {
+                    window.location.href = "/MockTest/MockTestSpeaking/SkipAllSpeakingQuestions";
+                }
+                     else if (@controllerName.ToLower() == "mocktestwriting" && @actionName == "index") {
+                    window.location.href = "/MockTest/MockTestWriting/SkipAllWriting1Questions";
+                }
+                     else if (@controllerName.ToLower() == "mocktestwriting" && @actionName == "startwriting1") {
+                    window.location.href = "/MockTest/MockTestWriting/SkipAllWriting2Questions";
+                }
+                      else if (@controllerName.ToLower() == "mocktestreading" ) {
+                    window.location.href = "/MockTest/MockTestReading/SkipAllReadingQuestions";
+                }
+                     else {
+                    window.location.href = "/MockTest/MockTestListening/SkipAllListeningQuestions";
+                }*@
+
+
+            }
+
+
+
+        }
+
+        function SkipSection() {
+
+            if ('@controllerName.ToLower()' == 'mocktestspeaking') {
+                window.location.href = "/MockTest/MockTestSpeaking/SkipAllSpeakingQuestions";
+                }
+            else if ('@controllerName.ToLower()' == "mocktestwriting" && '@actionName.ToLower()'== "index") {
+                var questionId = '@TempData["QuestionId"]';
+                $("form").submit()
+
+                //$("#writingId").submit();
+                //window.location.href = "/MockTest/MockTestWriting/SkipAllWriting1Questions?questionId=" + questionId ;
+                }
+            else if ('@controllerName.ToLower()' == "mocktestwriting" && '@actionName.ToLower()' == "startwriting1") {
+                var questionId = '@TempData["QuestionId"]';
+                $("form").submit()
+                //window.location.href = "/MockTest/MockTestWriting/SkipAllWriting2Questions?questionId=" + questionId ;
+                }
+                 else if ('@controllerName.ToLower()'== "mocktestreading" ) {
+                window.location.href = "/MockTest/MockTestReading/SkipAllReadingQuestions";
+                 }
+                 else if ('@controllerName.ToLower()'== "mocktestlistening" && '@actionName.ToLower()'== "startlistening1") {
+                var questionId = '@TempData["QuestionId"]';
+                $("form").submit()
+                //window.location.href = "/MockTest/MockTestListening//SkipListeningOneQuestion?questionId=" + questionId ;
+            }
+
+             else {
+                window.location.href = "/MockTest/MockTestListening/SkipAllListeningQuestions";
+
+            }
+        }
+
+        $("#EndExam").on('click', function () {
+
+            window.close();
+        });
+
+        $("#finish").on('click', function () {
+
+            window.close();
+
+
+        });
+
+
+
+    </script>
+    @RenderSection("scripts", required: false)
+
+    @*<div class="modal modal-sm" id="subscriber_form">
+            <div class="modal-dialog modal-sm ">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <p> Please Click Next Button </p>
+                        <p><span><button onclick="SkipSection();" type="submit" id="popUpButton" class="uk-button uk-button-primary uk-border-pill uk-float-right ">Next <span uk-icon="chevron-right"></span></button></span></p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>*@
+    <div class="modal" tabindex="-1" role="dialog" id="subscriber_form" style="height:40%">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p><h2>Please Click Next Button </h2> </p>
+                    <p><span><button onclick="SkipSection();" type="submit" id="popUpButton" class="uk-button uk-button-primary uk-border-pill uk-float-right ">Next <span uk-icon="chevron-right"></span></button></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+

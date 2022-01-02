@@ -1,0 +1,146 @@
+body, html {
+    background: #eee;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    background: #fff;
+}
+
+.uk-button-primary {
+    background: #0c2b54 !important;
+}
+
+    .uk-button-primary:hover, .uk-button-primary:focus, .uk-button-primary.active {
+        background: #0d4288 !important;
+    }
+
+.uk-button-danger {
+    background: #ca0f0f !important;
+}
+
+    .uk-button-danger:hover, .uk-button-danger:focus, .uk-button-danger.active {
+        background: #a00d0d !important;
+    }
+
+
+.table-edited thead {
+    background: #0c2b54;
+}
+
+    .table-edited thead tr, th {
+        color: #fff !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+    }
+
+
+
+
+.uk-bg-primary {
+    background: #a01147;
+}
+/* main title */
+
+
+.uk-test-title h1 {
+    color: #fff;
+    font-size: 23px;
+    /*     margin-top: 8px;
+ */
+}
+
+main {
+    background: #eee;
+}
+
+.uk-test-title {
+    padding: 10px 0;
+}
+
+    .uk-test-title h5 {
+        color: #fff;
+        font-weight: 500;
+    }
+
+        .uk-test-title h5 span {
+            display: block;
+        }
+
+.uk-stripe {
+    background: #880f3c;
+}
+
+.uk-clearfix {
+    clear: both !important;
+}
+
+.uk-subtitle-header-footer {
+    background: #a01147;
+    display: block;
+    color: #fff;
+    font-size: 18px;
+    padding: 5px 20px;
+    font-weight: 500;
+}
+
+
+.uk-img-medium {
+    width: 100%;
+    height: 350px;
+   
+    overflow: hidden;
+}
+
+    .uk-img-medium img {
+        /*width: 100%;
+        height: 100%;*/
+        width: 500px !important;
+        height: 300px !important;
+        object-fit: cover;
+    }
+
+
+.mt8 {
+    margin-top: 8px;
+}
+
+/* range and progress */
+.uk-recoder-volum {
+    border: solid 1px #8c8c8c;
+}
+
+.uk-bordered {
+    border: solid 1px #eee;
+    background: #eee;
+    padding: 20px 10px !important;
+}
+
+.uk-dragable-box {
+    border: solid 1px #eee;
+    padding: 20px 15px;
+    background: #fff;
+}
+
+.paragraph {
+    line-height: 30px;
+}
+
+.uk-box-shortable {
+    width: 181px;
+    min-height: 20px !important;
+    border: solid 1px #eee;
+    display: inline-block;
+    margin: 4px 11px -5px !important;
+}
+
+    .uk-box-shortable .uk-box-shortable {
+        border: none;
+    }
+/* footer */
+footer.uk-next-previous-footer {
+    background: #d2d2d2;
+}

@@ -1,0 +1,36 @@
+﻿@model RTech.Demo.Areas.Student.ViewModels.OnlineTrainingMasterViewModel
+@{
+    ViewBag.Title = "OnlineTrainingDetails";
+    Layout = "~/Views/Shared/_Layout_PTE.cshtml";
+}
+
+<!--  Start -->
+<div class="packages_details">
+
+    <div class="container   ">
+        <div class="row">
+
+
+
+
+            <div class="col-lg-8">
+                @Html.Raw(Model.Description)
+
+            </div>
+            <div class="col-lg-4 pull-right">
+                <div class="aside-details text-center fixed-div">
+                    <div class="priceinner">
+                        <span class="current-price">@Model.Price</span>  <span class="old-price"><strike>@*$179.99*@</strike></span>
+                    </div>
+                    <div class="buttonsect">
+                        <a href="@Url.Action("BuyOnlineTraning","Payment", new {Code = Model.CourseCode  })" class="buynow"> Buy Now</a>
+                    </div>
+                    <p class="text-center" style="margin: 8px; font-size: 13px;">30-Day Money-Back Guarantee</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<!--  End -->
